@@ -1,0 +1,164 @@
+<html><head>
+<meta charset="utf-8">
+<title>Planos mjailton</title>
+	<link rel="shortcut icon" type="image/x-icon" href="https://mjailton.com.br/imagens_geral/favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale =1">
+	<link rel="stylesheet" type="text/css" href="css/lightslider.css">
+	<link rel="stylesheet" type="text/css" href="css/auxiliar.css">
+	<link rel="stylesheet" type="text/css" href="css/grade.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="base-topo"> 	
+	<div class="topo">
+		<div class="conteudo d-flex justify-content-space-between">	
+			<a href="" class="mobmenu alt d-none"><i class="fas fa-bars" aria-hidden="true"></i></a>	
+			<a href="index.php" class="logo"><img src="img/logo-topo.png" class="img-fluido"></a>
+			<ul class="menu-topo">
+				<li><a href="<?php echo URL_BASE?>"> Home</a></li>
+				<li><a href="" class="btn btn-amarelo px-3"> Quero testar</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="cadastro">
+	<div class="conteudo">
+		<div class="rows">
+			
+			<div class="col-4 m-auto text-center border radius-10">
+				<i class="fas fa-rocket mb-4 text-roxo mt-4" aria-hidden="true"></i>				
+				<h3 class="h3 text-center text-azul">Cadastre-se</h3>
+				<p class="text-cinza">Preencha os campos ao lado e cadastre-se gratuitamente.</p>
+				<p class="py-4">ou</p>
+				<a href="" class="btn btn-azul d-inline-block senha">Login</a>
+				
+				<div class="text-left mostraCampo">		
+				<a href="" class="senha alt">x</a>
+				<h3 class="h5 text-center text-branco">Entre com seu login e senha</h3>
+					<form action="" method="post">
+						<div class="rows">
+							<div class="col-12 mb-3">
+								<label class="text-label">Login</label>
+								<input type="text" class="form-campo required" placeholder="Inserir login">
+							</div>
+							<div class="col-12 mb-3">
+								<label class="text-label">Senha</label>
+								<input type="text" class="form-campo required" placeholder="Inserir senha">
+							</div>
+							<div class="col-12 text-center">
+								<input type="submit" class="btn btn-azul m-auto" value="Logar">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>		
+			
+			<div class="col-8 m-auto">
+			<div class="caixa border">
+				<form action="fim_cadastro.html" method="post">			
+				
+					<h3 class="h3 text-center text-azul">Experimente agora</h3>
+					<div class="rows">
+					<div class="col-12">
+						<div class=" mb-3">
+						<label class="text-label">Empresa</label>
+						<input type="text" class="form-campo required" name="empresa">
+						</div>
+						<div class=" mb-3">
+						<label class="text-label">Seu nome completo</label>
+						<input type="text" class="form-campo required" name="nome_completo">
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-group  mb-3">
+						<label class="text-label">Telefone</label>
+						<input type="text" minlength="10" maxlength="15" name="telefone" class="mascara_tel form-campo required">
+						</div>
+						<div class="form-group mb-3">
+						<label class="text-label">E-mail</label>
+						<input type="email" class="form-campo required" name="email" value="">
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-group mb-3">
+						<label class="text-label">Crie sua senha de acesso</label>
+						<input type="password" class="form-campo required" name="senha">
+						</div>
+						<div class="form-group mb-3">
+						<label class="text-label">Como conheceu o Actana?</label>
+						<select class="form-campo" name="como_conheceu">
+						<option value="">Selecione uma opção</option>
+						<option value="indicacao">Indicação</option>
+						<option value="bing">Bing</option>
+						<option value="google">Google</option>
+						<option value="facebook">Facebook</option>
+						<option value="eventos">Eventos</option>
+						<option value="outro">Outro</option>
+						</select>
+						</div>
+
+					</div>
+					</div>
+					<div class="col-12 text-center mt-3">
+						<input type="submit" class="btn btn-azul m-auto" value="Cadastrar">
+						<input type="hidden" name="g-recaptcha-response" value="">
+					</div>
+					</form>
+			
+			</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+<div class="base-rodape">
+	<div class="conteudo">
+		<div class="rows">
+			<div class="col-9">
+				<strong>Suporte</strong>
+				<ul>
+					<li><i class="fas fa-envelope" aria-hidden="true"></i> email@suporte.com.br</li>
+					<li><i class="fab fa-whatsapp text-verde" aria-hidden="true"></i> <a href="http://api.whatsapp.com/send?1=pt_BR&amp;phone=telefone" class="text-verde">+55 (98) 0001-0002</a></li>
+				</ul>
+			</div>
+			<div class="col-3 redes">
+				<strong>Siga-nos</strong>
+				<ul>
+					<li><a target="blank" href="https://www.instagram.com/mjailtonoficial/?hl=pt-br"><i class="fab fa-instagram" aria-hidden="true"></i> <b>Instagram</b></a></li>
+					<li><a target="blank" href="https://www.facebook.com/profile.php?id=100012512683900"><i class="fab fa-facebook" aria-hidden="true"></i> <b>Facebook</b></a></li>
+					<li><a target="blank" href="https://www.youtube.com/user/mjailton"><i class="fab fa-youtube" aria-hidden="true"></i> <b>Youtube</b></a></li>
+				</ul>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+
+<a href="" class="suport-whats"></a>
+   	
+	  
+	  	<script src="js/jquery.min.js"></script>
+		<script src="https://kit.fontawesome.com/9480317a2f.js"></script>
+		<script src="js/componentes/js_modal.js"></script>
+		<script src="js/js.js"></script>			
+		<script type="text/javascript" src="js/lightslider.js"></script>	
+		<script type="text/javascript" src="js/lightslider-mob.js"></script>
+		
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript">
+            $(function () {
+                var $doc = $('html,body');
+                $('.scroll-page').click(function () {
+                    $doc.animate({
+                        scrollTop: $($.attr(this, 'href')).offset().top
+                    }, 500);
+                    return false;
+                });
+            });
+        </script>
+
+</body></html>

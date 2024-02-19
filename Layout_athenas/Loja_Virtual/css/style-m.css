@@ -1,0 +1,10 @@
+/*1236*/
+@media (min-width:1236px){
+	.jsNav {bottom: 106px;}
+}
+
+/*1360*/
+@media (min-width:1360px){
+	.jsNav {bottom: 85px;}
+	.base-banner { height: calc(95vh - 168px);}
+}

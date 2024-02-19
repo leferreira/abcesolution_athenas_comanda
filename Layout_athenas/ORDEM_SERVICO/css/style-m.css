@@ -1,0 +1,128 @@
+/*420*/
+@media (min-width:420px){
+	main.main.calendar .eventos p {max-width: 6.4ch;}
+}
+
+/*520*/
+@media (min-width:520px){
+	main.main.calendar .eventos p {max-width: 9.4ch;}	
+	.titulo.d-flex.justify-content-space-between.align-vertical-center {justify-content:space-between}
+.titulo.d-flex.justify-content-space-between.align-vertical-center span{display:block}
+}
+
+/*550*/
+@media (min-width:550px){
+	.base-login{padding: 1rem 3rem;}
+	main.main.calendar .day-of-week > *,
+	main.main.calendar .date-grid > * { font-size: 0.85em; border: solid 1px var(--blue-grey-100);padding: 0.45rem 0; min-height: 33px;align-items: center; display: grid; color: var(--blue-grey-600);}
+	main.main.calendar .eventos { padding: 0px 4px; display: inline-table;}
+	.cabecalho .logo {width: 39%;}
+}
+
+/*700*/
+@media (min-width:700px){
+	.cabecalho .logo { width: 18%;background-position-x: 13px;}
+	.base-login{padding: 1rem 5rem;}
+main.main.calendar .month-indicator { display: flex;}
+main.main.calendar .month-indicator .controls { grid-column-gap:0px;}
+main.main.calendar .month-indicator .controls .btn { margin-bottom: 0px;border-radius:0;padding: 10px 7px;}
+main.main.calendar .month-indicator .controls .btn:first-child { border-radius:4px 0 0 4px;}
+main.main.calendar .month-indicator .controls .btn:last-child { border-radius:0 4px 4px 0;}
+main.main.calendar .month-indicator .controls button.btn {padding: 12px 7px;}
+.base-login .caixa-login {padding: 1rem 4rem;}
+}
+
+/*760*/
+@media (min-width:760px){
+.tooltip:hover:after,
+.tooltip:hover:before {  opacity: 1;}
+main.main.calendar .eventos {width: 92%;text-align: center;}
+main.main.calendar .eventos p { max-width: 14ch;}
+}
+
+/*991*/
+@media (min-width:991px){
+	.comments .col-5.d-flex {
+    position: initial;
+    z-index: 1;
+    width:auto;
+}
+.tooltip:hover:after,
+.tooltip:hover:before {  opacity: 1;}
+main.main.calendar .eventos p { max-width: 17ch;}
+main.main.calendar .eventos { width: 100%;text-align: center; padding: 0px 4px; display: grid; height: 98%; align-items: center;}
+ main.main.calendar .date-grid > * {  padding: 0;  min-height: 50px;}
+ main.main.calendar .month-indicator .controls .btn { padding: 5px 7px;font-size: .75rem;}
+ main.main.calendar .month-indicator .controls button.btn { padding: 7px 7px; }
+ 
+.contAgenda .rows.cont .border-left{display:block;text-align:center;margin-left: 5px;}
+.contAgenda .rows.cont{display:grid;grid-template-columns: 49.5% 1% 46.8%; grid-column-gap: 13px;}
+.contAgenda .rows.cont .col-6{margin-bottom:0;max-width:100%}
+.contAgenda .rows.cont .col-2{position: absolute;  right: 17px;  width: 11%;  background: #fff;  box-shadow: 0 0 4px 0 #44444461; border-radius: 2px; top: 50px; padding: 1rem 0;display:none}
+.contAgenda .rows.cont .col-2 .width-100{display:flex; grid-gap: 13px;justify-content: center;}
+.contAgenda .rows.cont .fa-ellipsis-v{display:grid}
+.contAgenda .rows.cont .titulo {font-size: 1.4em!important;}
+.contNoticia .caixa{padding: 3rem 3rem;}
+.contNoticia .embed-responsive,
+.contNoticia .img-fluido
+{margin-bottom:0}
+.contNoticia .rows.mb-4.border-bottom{margin-left: -3rem; margin-right: -3rem;padding-left: 3rem; padding-right: 3rem;}
+.window{  width: 80%!important;}
+.window.menor{
+    width: 32%!important;
+	top: 25%!important;
+    z-index: 100;
+}
+.window.form{
+    width: 60%!important;
+    z-index: 100;
+	max-width:100%!important;
+}
+.window.medio{
+    width: 45%!important;
+    z-index: 100;
+}
+.alt-5{padding-right:2rem;border-right:solid 1px #c0d0d8!important}
+.base-login .caixa-login { padding: 20px;overflow:hidden;height:552px}
+.base-login .caixa-login .col-8.position-absolute{display:block!important;top: 0; left: -19px;}
+.base-login .caixa-login .col-4.position-absolute{position:absolute!important;right:0;    max-width: 38.333333%;}
+.base-login .caixa-login {background: #e9e9e9;}
+.base-login .caixa-login .form-campo {  background: #f2f4f5;}
+.base-login .caixa-login { background: #e9e9e9; box-shadow: 0 0 8px 0 #0000006e;}
+}
+
+/*1024*/
+@media (min-width:1024px){
+.base-login {padding: 1rem 1rem;}
+.mobmenu{display:none}
+.alt-5{padding-right:3rem;}
+.conteudo { width: 81%; margin-left: 194px;padding: 0 1rem;}
+#principal{display:block;width: 185px;}
+main.main.calendar { margin-top: 0.1rem;height: 386px; overflow-y: auto;}
+main.main.calendar .day-of-week > *{ min-height: 30px;}
+.base-login .caixa-login .col-4.position-absolute { right: 20px;}
+.base-login .caixa-login .col-8.position-absolute .img-fluido {max-width: 79%;}
+}
+
+/*1200*/
+@media (min-width: 1200px){
+.base-login { padding: 1rem 6rem;}
+.base-login .caixa-login .col-8.position-absolute .img-fluido { max-width: 76%;}
+}
+
+/*1280*/
+@media (min-width: 1280px){
+.conteudo {  width: 83%;   margin-left: 218px;}
+ main.main.calendar .day-of-week { margin-top: 5px;}
+ #principal {width: 210px;}
+ .base-login .caixa-login { height: 536px;}
+ .base-login .caixa-login .col-8.position-absolute .img-fluido { max-width: 69%;}
+ .base-login .caixa-login .col-4.position-absolute { right: 44px;}
+}
+
+/*1420*/
+@media (min-width: 1320px){
+.base-login { padding-top: 3.7rem;}
+.base-login .caixa-login {  max-width: 876px;}
+.base-login .caixa-login .col-4.position-absolute {  max-width: 41.333333%;}
+}

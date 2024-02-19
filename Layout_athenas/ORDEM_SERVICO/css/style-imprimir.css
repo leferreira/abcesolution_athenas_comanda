@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+*{
+	padding:0;margin:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	}
+body{
+	font-family: 'Roboto', sans-serif;
+	font-size:.9rem;
+	color:#000;
+}
+
+.conteudo{
+	max-width: 100%;
+    padding: 0;
+    width: 960px;
+    margin: 0 auto;
+	
+}
+.tt-topo{
+	text-align:center;
+	padding:3px 0;
+	text-transform:uppercase;
+	color:#000;
+	font-size: .9rem;
+}
+.tt-subtopo{
+	text-align:center;
+	font-size:1.3rem;
+	margin-top:5px;
+	margin-bottom:5px;
+	color:#000;
+	line-height:17px;
+	font-weight:bold
+}
+.tt-subtopo small{
+	font-size:.8rem;
+}
+.tt-subtopo2{
+	text-align:center;
+	font-size:.8rem;
+	margin-bottom:5px;
+	font-weight:300;
+	color:#000
+}
+.tt-subtopo3{
+	text-align:center;
+	font-size:.7rem;
+	margin-bottom:3px;
+	font-weight:300;
+	color:#000	
+}
+.base-tabela{
+	max-width:100%;
+	width:100%;
+	border:0;
+}
+.tabela{
+	max-width:100%;
+	width:100%;
+	border:solid 2px #444;
+	border-top:0;
+}
+.head .col-12{border-top:solid 2px #444;}
+.head .col{font-weight:700}
+
+.tabela td,.head .col,
+.tabela th{
+	padding:.5rem .2rem;
+	border-right:0;
+	border-top:solid 2px #444;
+	border-left:0;
+	text-transform:uppercase;
+	color:#000;
+	font-size:.5rem;
+	background:#fff
+}
+.tabela th{background:#f5f5f5}
+
+.rows{
+	display:flex;
+	display:-ms-flex;
+	flex-wrap:wrap;
+	-ms-flex-wrap:wrap;
+	margin-left:-15px;
+	margin-right:-15px;
+}
+
+.col-1,.col-2,.col-3,.col-4,.col-6,.col-7,.col-8,.col-9,.col-10,.col-12{
+	position:relative;
+	width:100%;
+	min-height:1px;
+	padding-right:15px;
+	padding-left:15px;
+}
+
+@media(min-width:992px){
+	.col{
+		flex-basis:1;
+		-ms-flex-positive:1;
+		flex-grow:1;
+	}
+	/*equivale a 12 colunas*/
+	.col-1{
+		max-width:8.333333%;
+		ms-flex:0 0 8.333333%;
+		flex:0 0 8.333333%;
+	}
+	/*equivale a 6 colunas*/
+	.col-2{
+		max-width:16.666667%;
+		ms-flex:0 0 16.666667%;
+		flex:0 0 16.666667%;
+	}
+	/*equivale a 4 colunas*/
+	.col-3{
+		max-width:25%;
+		ms-flex:0 0 25%;
+		flex:0 0 25%;
+	}
+	/*equivale a 3 colunas*/
+	.col-4{
+		max-width:33.333333%;
+		ms-flex:0 0 33.333333%;
+		flex:0 0 33.333333%;
+	}
+	/*equivale a 2 colunas*/
+	.col-6{
+		max-width:50%;
+		ms-flex:0 0 50%;
+		flex:0 0 50%;
+	}
+	.col-7{
+		max-width: 14.62%;
+		flex: 0 0 14.62%;
+		ms-flex:0 0 14.62%;
+	}
+	.col-7-2{
+		max-width: 14.359%;
+		flex: 0 0 14.359%;
+		ms-flex:0 0 14.359%;
+	}
+	/*equivale a 8 colunas*/
+	.col-8{
+		max-width:66.666667%;
+		ms-flex:0 0 66.666667%;
+		flex:0 0 66.666667%;
+	}
+	/*equivale a 9 colunas*/
+	.col-9{
+		max-width:75%;
+		ms-flex:0 0 75%;
+		flex:0 0 75%;
+	}
+	/*equivale a 10 colunas*/
+	.col-10{
+		max-width:83.333333%;
+		ms-flex:0 0 83.333333%;
+		flex:0 0 83.333333%;
+	}
+	/*equivale a 12 colunas*/
+	.col-12{
+		max-width:100%;
+		ms-flex:0 0 100%;
+		flex:0 0 100%;
+	}
+}
+
+
+.mt-2,.my-2{margin-top:.9rem!important;}
+.pt-2,.py-2{padding-top:.9rem!important;}
+.img-fluido{max-width:100%;}
+
+
+@media (max-width:1024px){
+	.conteudo {padding: 0 1rem;}
+	.tabela td, .tabela th {
+    font-size: .69rem;
+	}
+}
