@@ -1,4 +1,4 @@
-@extends('template')
+@extends('Cardapio.template')
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido ordem">
@@ -7,10 +7,9 @@
                     <div class="caixa">
                         <div class="rows rows2">
                             <div class="col-12 p-1 px-4 h3 mb-0"><b>Pedido:</b> <span
-                                    class="text-azul">{{ $pedido->identificacao ?? null }}</span></div>
+                                    class="text-azul">{{ $pedido->id ?? null }}</span></div>
                             <div class="col-6 mb-3">
-                                <span class="px-3"><b>Mesa:</b> {{ $pedido->mesa->nome ?? null }}</span>
-                                <span class="px-3"><b>Garçon:</b> {{ $pedido->vendedor->nome ?? null }}</span>
+                                <span class="px-3"><b>Cliente:</b> {{ $pedido->cliente->nome_razao_social }}</span>
                                 <span class="px-3"><b>Abertura:</b>{{ databr($pedido->data_abertura) }}
                                     {{ $pedido->hora_abertura }}</span>
                             </div>
@@ -64,21 +63,16 @@
                                         </table>
                                     </div>
 
-                                    <p class="p-1" style="display:none">Nenhum intem selecionado</p>
+                                    <p class="p-1" style="display:none">Nenhum item selecionado</p>
                                 </div>
                             </div>
 
                             <div class="col-12 mb-3 d-flex px-4 text-end">
                                 @if ($pedido->status_id == config('constantes.status.ABERTO'))
-                                    <a href="{{ route('pedido.enviarCozinha', $pedido->id) }}"
+                                    <a href="{{ route('pedidocliente.enviarPedido', $pedido->id) }}"
                                         class="btn btn-verde2">Enviar
                                         Pedido <i class="fas fa-arrow-right"></i></a>
-                                @elseif($pedido->status_id == config('constantes.status.ENTREGUE'))
-                                    <a href="{{ route('pedido.finalizarPedido', $pedido->id) }}"
-                                        class="btn btn-vermelho">Finalizar
-                                        Pedido <i class="fas fa-arrow-right"></i></a>
                                 @endif
-                                <a href="#" class="btn btn-roxo">Imprimir <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -135,7 +129,7 @@
     }
 </script>
 
-<form action="{{ route('itempedidocliente.store') }}" method="POST">
+<form action="{{ route('itempedido.store') }}" method="POST">
     @csrf
     <div class="window menor" id="modalQtde">
         <div class="px-4 px-ms-4 pb-3 width-100 d-inline-block">

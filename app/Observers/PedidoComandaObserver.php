@@ -9,7 +9,9 @@ use App\Models\PedidoComanda;
 class PedidoComandaObserver
 {
     public function created(PedidoComanda $pedido){
-        Mesa::find($pedido->mesa_id)->update(["status_id" => config("constantes.status.ABERTO")]);
+        if($pedido->online=='N'){
+            Mesa::find($pedido->mesa_id)->update(["status_id" => config("constantes.status.ABERTO")]);
+        }
     }
 
 

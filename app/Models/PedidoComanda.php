@@ -12,6 +12,7 @@ class PedidoComanda extends Model
         'empresa_id',
         'pedido_id',
         'comanda_id',
+        'cliente_id',
         'mesa_id',
         'status_id',
         'vendedor_id',
@@ -20,8 +21,17 @@ class PedidoComanda extends Model
         'data_fechamento',
         'hora_fechamento',
         'identificacao',
+        'online',
         'total',
     ];
+
+    public function cliente(){
+        return $this->belongsTo(Cliente::class);
+    }
+
+    public function status(){
+        return $this->belongsTo(Status::class);
+    }
 
     public function vendedor(){
         return $this->belongsTo(Vendedor::class);

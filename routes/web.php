@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\CardapioController;
 use App\Http\Controllers\CozinhaController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemPedidoClienteController;
 use App\Http\Controllers\ItemPedidoController;
+use App\Http\Controllers\PedidoClienteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +29,10 @@ Route::get('/pedido/finalizarPedido/{id}',[PedidoController::class,"finalizarPed
 Route::resource('pedido', PedidoController::class);
 Route::resource('itempedido', ItemPedidoController::class);
 Route::resource('cozinha', CozinhaController::class);
+Route::resource('cardapio', CardapioController::class);
+
+
+Route::get('/pedidocliente/enviarPedido/{id}',[PedidoClienteController::class,"enviarPedido"])->name("pedidocliente.enviarPedido");
+Route::resource('pedidocliente', PedidoClienteController::class);
+
+Route::resource('itempedidocliente', ItemPedidoClienteController::class);

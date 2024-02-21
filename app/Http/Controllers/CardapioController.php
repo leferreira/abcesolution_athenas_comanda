@@ -12,17 +12,15 @@ use Exception;
 use Illuminate\Http\Request;
 use stdClass;
 
-class PedidoController extends Controller
+class CardapioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $dados["listaMesa"]      = PedidoComanda::where('online',"<>", 'S')->get();
-        $dados["listaOnline"]    = PedidoComanda::where('online',"S")->get();
-        $dados["categorias"]     = ComandaCategoria::get();
-        return view("Pedido.Index", $dados);
+        $dados["categorias"]= ComandaCategoria::get();
+        return view("Cardapio.home", $dados);
     }
 
     /**
@@ -54,7 +52,6 @@ class PedidoController extends Controller
             $pedido->empresa_id    = $empresa->id;
             $pedido->status_id     = config("constantes.status.ABERTO");
             $pedido->comanda_id    = $mesa->comanda_id;
-            $pedido->online        = "N";
             $pedido->data_abertura = hoje();
             $pedido->hora_abertura = agora();
             $pedido                = PedidoComanda::create(objToArray($pedido));
@@ -107,9 +104,7 @@ class PedidoController extends Controller
         $pedido = PedidoComanda::find($id);
         $pedido->status_id = config("constantes.status.ENVIADO_PARA_COZINHA");
         $pedido->save();
-        if($pedido->online <> 'S'){
-            Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
-        }
+        Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
         return redirect()->route('home');
     }
 
@@ -119,9 +114,8 @@ class PedidoController extends Controller
         $pedido = PedidoComanda::find($id);
         $pedido->status_id = config("constantes.status.PEDIDO_PRONTO");
         $pedido->save();
-        if($pedido->online <> 'S'){
-            Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
-        }
+
+        Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
 
         return redirect()->route('home');
     }
@@ -132,9 +126,8 @@ class PedidoController extends Controller
         $pedido = PedidoComanda::where(["comanda_id"=>$mesa->comanda_id])->first();
         $pedido->status_id = config("constantes.status.ENTREGUE");
         $pedido->save();
-        if($pedido->online <> 'S'){
-            Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
-        }
+
+        Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
 
         return redirect()->route('home');
     }
@@ -145,9 +138,7 @@ class PedidoController extends Controller
         $pedido->status_id = config("constantes.status.FINALIZADO");
         $pedido->save();
 
-        if($pedido->online <> 'S'){
-            Mesa::find($pedido->mesa_id)->update(["status_id"=> config("constantes.status.ABERTO")]);
-        }
+        Mesa::find($pedido->mesa_id)->update(["status_id"=> config("constantes.status.ABERTO")]);
 
         return redirect()->route('home');
     }

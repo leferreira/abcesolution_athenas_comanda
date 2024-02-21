@@ -13,11 +13,14 @@
                         <span>Nome de usuário</span>
                     </div>
                     <ul class="usuario">
-                        <li><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="{{ route('pedido.index') }}"><i class="fas fa-user-alt"></i> Pedidos</a></li>
-                        <li><a href="{{ route('cozinha.index') }}"><i class="fas fa-address-book"></i> Cozinha</a></li>
-                    </ul>
+                        <li><a href="{{ route('cardapio.index') }}"><i class="fas fa-home"></i> Home</a></li>
+                        <!--<li><a href="index.php?link=5"><i class="fas fa-user-alt"></i> Login</a></li> -->
+                        <li><a href="{{ route('pedidocliente.index') }}"><i class="fas fa-address-book"></i> Meus
+                                Pedidos</a>
+                        </li>
                 </li>
+            </ul>
+            </li>
             </ul>
         </div>
     </div>
