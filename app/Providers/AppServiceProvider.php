@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Comanda;
+use App\Models\ComandaItemPedido;
+use App\Models\ComandaPedido;
 use App\Models\ItemComanda;
 use App\Models\ItemPedidoComanda;
 use App\Models\Mesa;
@@ -28,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        PedidoComanda::observe(PedidoComandaObserver::class);
-        ItemPedidoComanda::observe(ItemPedidoObserver::class);
+        ComandaPedido::observe(PedidoComandaObserver::class);
+        ComandaItemPedido::observe(ItemPedidoObserver::class);
     }
 }

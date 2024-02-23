@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ComandaCategoria;
+use App\Models\ComandaItemPedido;
+use App\Models\ComandaPedido;
 use App\Models\Empresa;
-use App\Models\ItemPedidoComanda;
-use App\Models\PedidoComanda;
 use App\Models\Produto;
 use Exception;
 use Illuminate\Http\Request;
@@ -48,7 +48,7 @@ class ItemPedidoController extends Controller
             $item->identificacao = $request->identificacao;
             $item->data_abertura = hoje();
             $item->hora_abertura = agora();
-            $item = ItemPedidoComanda::create(objToArray($item));
+            $item = ComandaItemPedido::create(objToArray($item));
 
             return redirect()->back()->with('msg_sucesso', "item apagado com sucesso.");
 
@@ -63,7 +63,7 @@ class ItemPedidoController extends Controller
     public function show($id )
     {
 
-        $dados["Pedido"]    = PedidoComanda::find($id);
+        $dados["Pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
         return view("Pedido.Itens", $dados);
     }
@@ -79,7 +79,7 @@ class ItemPedidoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PedidoComanda $Pedido)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,11 +90,11 @@ class ItemPedidoController extends Controller
     public function destroy($id)
     {
         try{
-            $h = ItemPedidoComanda::find($id);
+            $h = ComandaItemPedido::find($id);
             if($h){
                 $h->delete();
             }
-            PedidoComanda::somarTotal($h->Pedido_id);
+            ComandaPedido::somarTotal($h->Pedido_id);
             return redirect()->back()->with('msg_sucesso', "item apagado com sucesso.");
         }catch (\Exception $e){
             return redirect()->back()->with('msg_erro', "Erro: " . $e->getMessage());

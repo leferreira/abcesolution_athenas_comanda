@@ -1,4 +1,13 @@
-@extends('cardapio.template')
+@php
+    if (session('tipo') == 'admin') {
+        $extend = 'Admin.template';
+    } elseif (session('tipo') == 'garcon') {
+        $extend = 'Garcon.template';
+    }
+@endphp
+
+@extends($extend)
+
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido border p-1 radius-4 bg-branco">
@@ -81,7 +90,7 @@
                                                 <td align="center"><?php echo $p->status->status; ?></td>
                                                 <td align="center"><?php echo $p->total; ?></td>
                                                 <td class="text-right">
-                                                    @if ($p->status_id == config('constantes.status.ABERTO'))
+                                                    @if ($p->status_id == config('constantes.status.NOVO'))
                                                         <a href="{{ route('pedido.enviarCozinha', $p->id) }}"> Enviar
                                                             Cozinha
                                                         </a>

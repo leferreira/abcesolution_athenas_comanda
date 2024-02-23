@@ -1,4 +1,4 @@
-@extends('template')
+@extends('Garcon.template')
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido ordem">
@@ -25,7 +25,7 @@
                                                 @foreach ($pedidos as $pedido)
                                                     <tr class="bg-branco">
                                                         <td class="text-left">{{ $pedido->id }}</td>
-                                                        <td class="text-center">{{ $pedido->mesa->nome }}</td>
+                                                        <td class="text-center">{{ $pedido->mesa->nome ?? null }}</td>
                                                         <td class="text-center">{{ $pedido->hora_abertura }}</td>
                                                         <td class="text-right">
                                                             <a href="{{ route('cozinha.show', $pedido->id) }}"

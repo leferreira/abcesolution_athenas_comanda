@@ -6,7 +6,7 @@ use App\Models\Comanda;
 use App\Models\ComandaCategoria;
 use App\Models\Empresa;
 use App\Models\Mesa;
-use App\Models\PedidoComanda;
+use App\Models\ComandaPedido;
 use App\Models\Vendedor;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,9 +19,9 @@ class CozinhaController extends Controller
      */
     public function index()
     {
-        $dados["pedidos"]    = PedidoComanda::where(["status_id"=>config("constantes.status.ENVIADO_PARA_COZINHA")])->get();
+        $dados["pedidos"]    = ComandaPedido::where(["status_id"=>config("constantes.status.ENVIADO_PARA_COZINHA")])->get();
 
-        return view("Cozinha.Index", $dados);
+        return view("Cozinha.home", $dados);
 
     }
 
@@ -56,7 +56,7 @@ class CozinhaController extends Controller
             $pedido->comanda_id    = $mesa->comanda_id;
             $pedido->data_abertura = hoje();
             $pedido->hora_abertura = agora();
-            $pedido                = PedidoComanda::create(objToArray($pedido));
+            $pedido                = ComandaPedido::create(objToArray($pedido));
 
             return redirect()->route('pedido.edit', $pedido->id)->with('msg_sucesso', "Cliente Inserido com sucesso.");
 
@@ -96,8 +96,8 @@ class CozinhaController extends Controller
      */
     public function show($id )
     {
-        $dados["pedidos"]   = PedidoComanda::where(["status_id"=>config("constantes.status.ENVIADO_PARA_COZINHA")])->get();
-        $dados["pedido"]    = PedidoComanda::find($id);
+        $dados["pedidos"]   = ComandaPedido::where(["status_id"=>config("constantes.status.ENVIADO_PARA_COZINHA")])->get();
+        $dados["pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
         return view("Cozinha.Itens", $dados);
     }
@@ -107,7 +107,7 @@ class CozinhaController extends Controller
      */
     public function edit($id )
     {
-        $dados["pedido"]    = PedidoComanda::find($id);
+        $dados["pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
         return view("Comanda.Itens", $dados);
     }

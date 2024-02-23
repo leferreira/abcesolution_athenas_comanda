@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Comanda;
 use App\Models\ComandaCategoria;
+use App\Models\ComandaPedido;
 use App\Models\Empresa;
 use App\Models\Mesa;
 use App\Models\PedidoComanda;
 use App\Models\Vendedor;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use stdClass;
 
 class PedidoController extends Controller
@@ -19,8 +21,9 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $dados["listaMesa"]      = PedidoComanda::where('online',"<>", 'S')->get();
-        $dados["listaOnline"]    = PedidoComanda::where('online',"S")->get();
+
+        $dados["listaMesa"]      = ComandaPedido::where('online',"<>", 'S')->get();
+        $dados["listaOnline"]    = ComandaPedido::where('online',"S")->get();
         $dados["categorias"]     = ComandaCategoria::get();
         return view("Pedido.Index", $dados);
     }
@@ -36,28 +39,24 @@ class PedidoController extends Controller
     public function novo($id)
     {
         try {
-            $vendedor = Vendedor::first();
-            $empresa  = Empresa::first();
-            $mesa     = Mesa::find($id);
-
-            if(!$vendedor){
-                throw new Exception("Cadastre um vendedor");
-            }
-
+            $usuario     = Auth::user();
+            $mesa        = Mesa::find($id);
             if(!$mesa){
                 throw new Exception("Mesa não encontrada ");
             }
 
-            $pedido = new stdClass;
+            $pedido                = new stdClass;
             $pedido->mesa_id       = $mesa->id;
-            $pedido->vendedor_id   = $vendedor->id;
-            $pedido->empresa_id    = $empresa->id;
+            $pedido->garcon_id     = session('tipo')== 'garcon' ? $usuario->garcon->id : null;
+            $pedido->admin_id      = session('tipo')== 'admin' ? $usuario->admin->id : null;
+            $pedido->empresa_id    = $usuario->empresa_id;
             $pedido->status_id     = config("constantes.status.ABERTO");
             $pedido->comanda_id    = $mesa->comanda_id;
             $pedido->online        = "N";
             $pedido->data_abertura = hoje();
             $pedido->hora_abertura = agora();
-            $pedido                = PedidoComanda::create(objToArray($pedido));
+
+            $pedido                = ComandaPedido::create(objToArray($pedido));
 
             return redirect()->route('pedido.edit', $pedido->id)->with('msg_sucesso', "Cliente Inserido com sucesso.");
 
@@ -98,58 +97,58 @@ class PedidoController extends Controller
     public function show($id )
     {
         $mesa = Mesa::find($id);
-        $pedido = PedidoComanda::where(["comanda_id"=>$mesa->comanda_id])->first();
+        $pedido = ComandaPedido::where(["comanda_id"=>$mesa->comanda_id])->first();
         return redirect()->route('pedido.edit', $pedido->id);
     }
 
     public function enviarCozinha($id )
     {
-        $pedido = PedidoComanda::find($id);
+        $pedido = ComandaPedido::find($id);
         $pedido->status_id = config("constantes.status.ENVIADO_PARA_COZINHA");
         $pedido->save();
         if($pedido->online <> 'S'){
             Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
         }
-        return redirect()->route('home');
+        return redirect()->route('mesa.index');
     }
 
     public function pedidoPronto($id )
     {
 
-        $pedido = PedidoComanda::find($id);
+        $pedido = ComandaPedido::find($id);
         $pedido->status_id = config("constantes.status.PEDIDO_PRONTO");
         $pedido->save();
         if($pedido->online <> 'S'){
             Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('cozinha.index');
     }
 
     public function entegarPedido($id )
     {
         $mesa = Mesa::find($id);
-        $pedido = PedidoComanda::where(["comanda_id"=>$mesa->comanda_id])->first();
+        $pedido = ComandaPedido::where(["comanda_id"=>$mesa->comanda_id])->first();
         $pedido->status_id = config("constantes.status.ENTREGUE");
         $pedido->save();
         if($pedido->online <> 'S'){
             Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('mesa.index');
     }
 
     public function finalizarPedido($id )
     {
-        $pedido = PedidoComanda::find($id);
-        $pedido->status_id = config("constantes.status.FINALIZADO");
+        $pedido = ComandaPedido::find($id);
+       $pedido->status_id = config("constantes.status.FINALIZADO");
         $pedido->save();
 
         if($pedido->online <> 'S'){
-            Mesa::find($pedido->mesa_id)->update(["status_id"=> config("constantes.status.ABERTO")]);
+            Mesa::find($pedido->mesa_id)->update(["status_id"=> config("constantes.status.ATIVO")]);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('mesa.index');
     }
 
     /**
@@ -157,9 +156,9 @@ class PedidoController extends Controller
      */
     public function edit($id )
     {
-        $dados["pedido"]    = PedidoComanda::find($id);
+        $dados["pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Comanda.Itens", $dados);
+        return view("Pedido.Itens", $dados);
     }
 
     /**

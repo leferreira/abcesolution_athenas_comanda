@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ItemPedidoComanda extends Model
+class ComandaMesa extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'produto_id', "pedido_id", 'quantidade', 'valor', 'subtotal', 'status_id',
-
+        'mesa_id', "comanda_id",
     ];
 
-    public function produto(){
+    public function mesa(){
         return $this->belongsTo(Produto::class);
     }
 
-    public function pedido(){
-        return $this->belongsTo(PedidoComanda::class);
+    public function comanda(){
+        return $this->belongsTo(Comanda::class);
     }
 }

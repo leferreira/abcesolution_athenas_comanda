@@ -12,7 +12,8 @@ class MesaController extends Controller
      */
     public function index()
     {
-        //
+        $dados["mesas"] = Mesa::get();
+        return view("Mesa.home", $dados);
     }
 
     /**

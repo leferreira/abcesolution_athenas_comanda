@@ -27,10 +27,14 @@
                                                     </div>
                                                     <span class="tt2">R$ {{ $prod->valor_venda }}</span>
                                                     <div class="botoes alt">
-                                                        <a href="avascript:;" onclick="abrirQuantidade({{ $prod->id }})"
-                                                            class="btn btn-gra-azul addicionar"
-                                                            title="Adicionar completo"><i class="fas fa-plus-circle"></i>
-                                                        </a>
+                                                        @if (Auth::check())
+                                                            <a href="avascript:;"
+                                                                onclick="abrirQuantidade({{ $prod->id }})"
+                                                                class="btn btn-gra-azul addicionar"
+                                                                title="Adicionar completo"><i
+                                                                    class="fas fa-plus-circle"></i>
+                                                            </a>
+                                                        @endif
 
                                                     </div>
                                                 </div>

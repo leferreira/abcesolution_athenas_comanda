@@ -8,23 +8,17 @@
         <div class="menu-topo-text">
             <ul>
                 <li class="sub">
-                    <div class="thumb">
-                        <img src="img/img-usuario.png">
-                        <span>Nome de usuário</span>
-                    </div>
-                    <ul class="usuario">
-                        <li><a href="{{ route('cardapio.index') }}"><i class="fas fa-home"></i> Home</a></li>
 
-                        <li><a href="{{ route('pedidocliente.index') }}"><i class="fas fa-address-book"></i> Meus
-                                Pedidos</a>
-                        </li>
-                        @if (!Auth::check())
-                            <li><a href="{{ route('cliente.create') }}"><i class="fas fa-user-alt"></i> Cadastrar</a>
-                            </li>
-                            <li><a href="{{ route('login') }}"><i class="fas fa-user-alt"></i> Login</a></li>
-                        @endif
-
-
+                <li>
+                    <h2>Visão do Admin</h2>
+                </li>
+                <li><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="{{ route('pedido.index') }}"> Pedidos</a></li>
+                <li><a href="{{ route('cozinha.index') }}"> Cozinha</a></li>
+                <li>
+                    @if (Auth::check())
+                        <span>{{ Auth::user()->nome }}</span>
+                    @endif
                 </li>
 
                 <ul class="usuario">
@@ -42,8 +36,7 @@
 
                     </li>
                 </ul>
-            </ul>
-            </li>
+                </li>
             </ul>
         </div>
     </div>

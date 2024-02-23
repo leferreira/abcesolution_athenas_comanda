@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PedidoComanda extends Model
+class ComandaPedido extends Model
 {
     use HasFactory;
     protected $fillable =[
@@ -15,7 +15,8 @@ class PedidoComanda extends Model
         'cliente_id',
         'mesa_id',
         'status_id',
-        'vendedor_id',
+        'garcon_id',
+        'admin_id',
         'data_abertura',
         'hora_abertura',
         'data_fechamento',
@@ -33,8 +34,12 @@ class PedidoComanda extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function vendedor(){
-        return $this->belongsTo(Vendedor::class);
+    public function garcon(){
+        return $this->belongsTo(ComandaGarcon::class);
+    }
+
+    public function admin(){
+        return $this->belongsTo(ComandaAdmin::class);
     }
 
     public function mesa(){
@@ -42,12 +47,12 @@ class PedidoComanda extends Model
     }
 
     public function itens(){
-        return $this->hasMany(ItemPedidoComanda::class, 'pedido_id', 'id');
+        return $this->hasMany(ComandaItemPedido::class, 'pedido_id', 'id');
     }
 
     public static function somarTotal($id){
-        $pedido             = PedidoComanda::find($id);
-        $pedido->total      = ItemPedidoComanda::where("pedido_id", $id)->sum("subtotal");
+        $pedido             = ComandaPedido::find($id);
+        $pedido->total      = ComandaItemPedido::where("pedido_id", $id)->sum("subtotal");
         $pedido->save();
     }
 }

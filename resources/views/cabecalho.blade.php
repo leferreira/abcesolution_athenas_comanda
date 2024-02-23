@@ -8,14 +8,13 @@
         <div class="menu-topo-text">
             <ul>
                 <li class="sub">
-                    <div class="thumb">
-                        <img src="img/img-usuario.png">
-                        <span>Nome de usuário</span>
-                    </div>
+
                     <ul class="usuario">
+
                         <li><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="{{ route('pedido.index') }}"><i class="fas fa-user-alt"></i> Pedidos</a></li>
-                        <li><a href="{{ route('cozinha.index') }}"><i class="fas fa-address-book"></i> Cozinha</a></li>
+                        <li><a href="{{ route('pedido.index') }}"> Pedidos</a></li>
+                        <li><a href="{{ route('cozinha.index') }}"> Cozinha</a></li>
+
                     </ul>
                 </li>
             </ul>

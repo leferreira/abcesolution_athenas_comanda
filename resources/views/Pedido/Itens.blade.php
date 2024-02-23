@@ -1,10 +1,34 @@
-@extends('Cozinha.template')
+@php
+    if (session('tipo') == 'admin') {
+        $extend = 'Admin.template';
+        $vendedor = $pedido->admin->nome ?? null;
+    } elseif (session('tipo') == 'garcon') {
+        $extend = 'Garcon.template';
+        $vendedor = $pedido->garcon->nome ?? null;
+    }
+@endphp
+
+@extends($extend)
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido ordem">
             <div class="rows">
                 <div class="col-4 ordem-left">
                     <div class="caixa">
+                        <div class="rows rows2">
+                            <div class="col-12 p-1 px-4 h3 mb-0"><b>Pedido:</b> <span
+                                    class="text-azul">{{ $pedido->identificacao ?? null }}</span></div>
+                            <div class="col-6 mb-3">
+                                <span class="px-3"><b>Mesa:</b> {{ $pedido->mesa->nome ?? null }}</span>
+                                <span class="px-3"><b>Garçon:</b> {{ $vendedor ?? null }}</span>
+                                <span class="px-3"><b>Abertura:</b>{{ databr($pedido->data_abertura) }}
+                                    {{ $pedido->hora_abertura }}</span>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <span class="d-block px-4 h3 mb-0"><b>Valor: </b>R$ {{ $pedido->total }}</span>
+                            </div>
+
+                        </div>
 
                         <div class="rows">
                             <div class="col-12 mb-3 ">
@@ -15,22 +39,33 @@
                                             cellspacing="0">
                                             <thead>
                                                 <tr class="bg-branco">
-                                                    <th align="left">id</td>
-                                                    <th align="left">Mesa</td>
-                                                    <th align="center">Hora da Abertura</td>
+                                                    <th align="left">Qtde</td>
+                                                    <th align="center">Item</td>
+                                                    <th align="center">Valor</td>
                                                     <th align="center">Ação</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($pedidos as $pedido)
+                                                @foreach ($pedido->itens as $item)
                                                     <tr class="bg-branco">
-                                                        <td class="text-left">{{ $pedido->id }}</td>
-                                                        <td class="text-center">{{ $pedido->mesa->nome ?? null }}</td>
-                                                        <td class="text-center">{{ $pedido->hora_abertura }}</td>
+                                                        <td class="text-left">{{ $item->produto->nome }}</td>
+                                                        <td class="text-center">{{ $item->quantidade }}</td>
+                                                        <td class="text-center">{{ $item->valor }}</td>
                                                         <td class="text-right">
-                                                            <a href="{{ route('cozinha.show', $pedido->id) }}"
+                                                            <a href="javascript:;" onclick="abrirModal('#add')"
                                                                 class="fas fa-edit btn btn-azul mx-1" title="Excluir">
                                                             </a>
+                                                            <a href="#"
+                                                                onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $item->id }}').submit() : '';"
+                                                                class="d-inline-block btn btn-vermelho btn-circulo btn-pequeno"
+                                                                title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                                                            <form action="{{ route('itempedido.destroy', $item->id) }}"
+                                                                method="POST" id="apagar{{ $item->id }}">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                {{ csrf_field() }}
+                                                            </form>
+
+
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -43,45 +78,57 @@
                                 </div>
                             </div>
 
-
+                            <div class="col-12 mb-3 d-flex px-4 text-end">
+                                @if ($pedido->status_id == config('constantes.status.ABERTO'))
+                                    <a href="{{ route('pedido.enviarCozinha', $pedido->id) }}"
+                                        class="btn btn-verde2">Enviar
+                                        Pedido <i class="fas fa-arrow-right"></i></a>
+                                @elseif($pedido->status_id == config('constantes.status.ENTREGUE'))
+                                    <a href="{{ route('pedido.finalizarPedido', $pedido->id) }}"
+                                        class="btn btn-vermelho">Finalizar
+                                        Pedido <i class="fas fa-arrow-right"></i></a>
+                                @endif
+                                <a href="#" class="btn btn-roxo">Imprimir <i class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-8 ordem-right">
                     <div class="caixa">
-                        <div class="rows rows2">
-                            <div class="col-12 p-1 px-4 h3 mb-0"><b>Pedido:</b> <span
-                                    class="text-azul">{{ $pedido->id ?? null }}</span></div>
-                            <div class="col-12 mb-3">
-                                <span class="px-3"><b>Mesa:</b> {{ $pedido->mesa->nome ?? null }}</span>
-                                <span class="px-3"><b>Garçon:</b> {{ $pedido->vendedor->nome ?? null }}</span>
-                                <span class="px-3"><b>Abertura:</b>{{ databr($pedido->data_abertura) }}
-                                    {{ $pedido->hora_abertura }}</span>
-                            </div>
-                        </div>
-
                         <div id="tabs" class="p-2">
+                            <ul>
+                                @php $cont = 1 @endphp
+                                @foreach ($categorias as $categoria)
+                                    <li><a href="#tabs-{{ $cont++ }}">{{ $categoria->categoria }}</a></li>
+                                @endforeach
+                            </ul>
                             @php $cont = 1 @endphp
+                            @foreach ($categorias as $cat)
+                                <div id="tabs-{{ $cont++ }}">
+                                    <div class="rows rows2">
+                                        @foreach ($cat->produtos as $prod)
+                                            <div class="col-2 d-flex mb-3">
+                                                <div class="caixa">
+                                                    <div class="home-mesa">
+                                                        <span class="tt">{{ $prod->nome }}</span>
+                                                    </div>
+                                                    <span class="tt2">R$ {{ $prod->valor_venda }}</span>
+                                                    <div class="botoes alt">
+                                                        <a href="avascript:;"
+                                                            onclick="abrirQuantidade({{ $prod->id }})"
+                                                            class="btn btn-gra-azul addicionar"
+                                                            title="Adicionar completo"><i class="fas fa-plus-circle"></i>
+                                                        </a>
 
-                            <div id="tabs-{{ $cont++ }}">
-                                <div class="rows rows2">
-                                    @foreach ($pedido->itens as $item)
-                                        <div class="col-2 d-flex mb-3">
-                                            <div class="caixa">
-                                                <span class="tt2">Qtde: {{ $item->quantidade }}</span>
-                                                <div class="home-mesa">
-                                                    <span class="tt">{{ $item->produto->nome }}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
+                                        @endforeach
 
-                            <div class="col-12 mb-3 d-flex px-4 text-end">
-                                <a href="{{ route('pedido.pedidoPronto', $pedido->id) }}" class="btn btn-verde2">Pedido
-                                    Pronto <i class="fas fa-arrow-right"></i></a>
-                            </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
 
@@ -98,7 +145,7 @@
     }
 </script>
 
-<form action="{{ route('itempedido.store') }}" method="POST">
+<form action="{{ route('itempedidocliente.store') }}" method="POST">
     @csrf
     <div class="window menor" id="modalQtde">
         <div class="px-4 px-ms-4 pb-3 width-100 d-inline-block">
