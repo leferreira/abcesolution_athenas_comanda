@@ -18,6 +18,7 @@ use App\Models\Vendedor;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use stdClass;
 
 class PedidoClienteController extends Controller
@@ -46,16 +47,15 @@ class PedidoClienteController extends Controller
     public function store(Request $request)
     {
         try {
-            $cliente  = Cliente::first();
-            $empresa  = Empresa::first();
 
-            if(!$cliente){
+            $usuario     = Auth::user();
+            if(!$usuario){
                 throw new Exception("Selecione  um Cliente");
             }
 
             $pedido = new stdClass;
-            $pedido->cliente_id    = $cliente->id;
-            $pedido->empresa_id    = $empresa->id;
+            $pedido->cliente_id    = $usuario->cliente->id ?? null;
+            $pedido->empresa_id    = $usuario->empresa_id;
             $pedido->status_id     = config("constantes.status.ABERTO");
             $pedido->data_abertura = hoje();
             $pedido->hora_abertura = agora();

@@ -10,6 +10,7 @@ use App\Models\ComandaPedido;
 use App\Models\Produto;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use stdClass;
 
 class ItemPedidoClienteController extends Controller
@@ -36,7 +37,7 @@ class ItemPedidoClienteController extends Controller
     public function store(Request $request)
     {
         try {
-            $empresa = Empresa::first();
+            $pedido = ComandaPedido::find($request->pedido_id);
             $produto = Produto::find($request->produto_id);
             $item = new stdClass;
             $item->pedido_id     = $request->pedido_id;
@@ -44,7 +45,7 @@ class ItemPedidoClienteController extends Controller
             $item->produto_id    = $request->produto_id;
             $item->valor         = $produto->valor_venda;
             $item->subtotal      = $produto->valor_venda * $item->quantidade;
-            $item->empresa_id    = $empresa->id;
+            $item->empresa_id    = $pedido->empresa_id;
             $item->status_id     = config("constantes.status.ABERTO");
             $item->identificacao = $request->identificacao;
             $item->data_abertura = hoje();

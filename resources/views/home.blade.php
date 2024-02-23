@@ -21,7 +21,8 @@
                                         </a>
                                     </div>
                                     <div class="fim col">
-                                        <a href="{{ route('cliente.index') }}" class="btn btn-gra-amarelo width-100">Cliente
+                                        <a href="{{ route('cardapio.index') }}"
+                                            class="btn btn-gra-amarelo width-100">Cliente
                                         </a>
                                     </div>
                                 </div>
