@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Comanda;
 use App\Models\ComandaCategoria;
@@ -16,16 +18,18 @@ use stdClass;
 
 class PedidoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
+
     public function index()
     {
+        $this->middleware('checkUserType:admin,garcon');
 
-        $dados["listaMesa"]      = ComandaPedido::where('online',"<>", 'S')->get();
-        $dados["listaOnline"]    = ComandaPedido::where('online',"S")->get();
+        $dados["listaMesa"]      = ComandaPedido::where('tipo_pedido', config("constantes.tipo_pedido.COMANDA_GARCON"))->get();
+        $dados["listaOnline"]    = ComandaPedido::where('tipo_pedido', config("constantes.tipo_pedido.COMANDA_CLIENTE"))->get();
+        $dados["listaDelivery"]  = ComandaPedido::where('tipo_pedido', config("constantes.tipo_pedido.DELIVERY"))->get();
         $dados["categorias"]     = ComandaCategoria::get();
-        return view("Pedido.Index", $dados);
+        return view("Comanda.Pedido.Index", $dados);
     }
 
     /**
@@ -52,7 +56,7 @@ class PedidoController extends Controller
             $pedido->empresa_id    = $usuario->empresa_id;
             $pedido->status_id     = config("constantes.status.ABERTO");
             $pedido->comanda_id    = $mesa->comanda_id;
-            $pedido->online        = "N";
+            $pedido->tipo_pedido   = config("constantes.tipo_pedido.COMANDA_GARCON");
             $pedido->data_abertura = hoje();
             $pedido->hora_abertura = agora();
 
@@ -65,31 +69,7 @@ class PedidoController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        try {
-            $vendedor = Vendedor::first();
-            $empresa = Empresa::first();
 
-            if(!$vendedor){
-                throw new Exception("Cadastre um vendedor");
-            }
-            $comanda = new stdClass;
-            $comanda->mesa_id       = $request->mesa_id;
-            $comanda->vendedor_id   = $vendedor->id;
-            $comanda->empresa_id    = $empresa->id;
-            $comanda->status_id     = config("constantes.status.ABERTO");
-            $comanda->identificacao = $request->identificacao;
-            $comanda->data_abertura = hoje();
-            $comanda->hora_abertura = agora();
-            $comanda = Comanda::create(objToArray($comanda));
-
-            return redirect()->route('pedido.show', $comanda->id)->with('msg_sucesso', "Cliente Inserido com sucesso.");
-
-        } catch (\Exception $e) {
-            return redirect()->back()->with('msg_erro', $e->getMessage());
-        }
-    }
 
     /**
      * Display the specified resource.
@@ -106,7 +86,7 @@ class PedidoController extends Controller
         $pedido = ComandaPedido::find($id);
         $pedido->status_id = config("constantes.status.ENVIADO_PARA_COZINHA");
         $pedido->save();
-        if($pedido->online <> 'S'){
+        if($pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_GARCON") || $pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_CLIENTE")){
             Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
         }
         return redirect()->route('mesa.index');
@@ -118,7 +98,7 @@ class PedidoController extends Controller
         $pedido = ComandaPedido::find($id);
         $pedido->status_id = config("constantes.status.PEDIDO_PRONTO");
         $pedido->save();
-        if($pedido->online <> 'S'){
+        if($pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_GARCON") || $pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_CLIENTE")){
             Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
         }
 
@@ -131,7 +111,7 @@ class PedidoController extends Controller
         $pedido = ComandaPedido::where(["comanda_id"=>$mesa->comanda_id])->first();
         $pedido->status_id = config("constantes.status.ENTREGUE");
         $pedido->save();
-        if($pedido->online <> 'S'){
+        if($pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_GARCON")|| $pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_CLIENTE")){
             Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
         }
 
@@ -144,7 +124,7 @@ class PedidoController extends Controller
        $pedido->status_id = config("constantes.status.FINALIZADO");
         $pedido->save();
 
-        if($pedido->online <> 'S'){
+        if($pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_GARCON") || $pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_CLIENTE")){
             Mesa::find($pedido->mesa_id)->update(["status_id"=> config("constantes.status.ATIVO")]);
         }
 
@@ -158,7 +138,7 @@ class PedidoController extends Controller
     {
         $dados["pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Pedido.Itens", $dados);
+        return view("Comanda.Pedido.Itens", $dados);
     }
 
     /**

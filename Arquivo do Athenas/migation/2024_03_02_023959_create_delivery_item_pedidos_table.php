@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemPedidoDeliveriesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,14 @@ class CreateItemPedidoDeliveriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_pedido_deliveries', function (Blueprint $table) {
+        Schema::create('delivery_item_pedidos', function (Blueprint $table) {
             $table->id();
             $table->BigInteger('pedido_id')->unsigned();
-            $table->foreign('pedido_id')->references('id')->on('pedido_deliveries');
-            
+            $table->foreign('pedido_id')->references('id')->on('comanda_pedidos');
+
             $table->BigInteger('produto_id')->unsigned();
             $table->foreign('produto_id')->references('id')->on('produtos');
-            
-            $table->BigInteger('tamanho_id')->nullable()->unsigned();
-            $table->foreign('tamanho_id')->references('id')->on('tamanho_pizzas')->onDelete('cascade');
-            
-            $table->BigInteger('cupom_desconto_id')->nullable()->unsigned();
-            $table->foreign('cupom_desconto_id')->references('id')->on('cupom_descontos');
-            
-            $table->integer('grade_produto_id')->nullable();
-            $table->string('unidade', 40)->nullable();
+
             $table->integer('quantidade');
             $table->decimal('valor', 10,2);
             $table->decimal('subtotal', 10,2);
@@ -37,10 +29,8 @@ class CreateItemPedidoDeliveriesTable extends Migration
             $table->decimal('desconto_por_valor', 10,2)->default(0)->nullable();
             $table->decimal('desconto_por_unidade', 10,2)->default(0)->nullable();
             $table->decimal('total_desconto_item', 10,2)->default(0)->nullable();
-            
+
             $table->string('observacao', 150)->nullable();
-            
-            
             $table->timestamps();
         });
     }
@@ -52,6 +42,6 @@ class CreateItemPedidoDeliveriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_pedido_deliveries');
+        Schema::dropIfExists('delivery_item_pedidos');
     }
-}
+};

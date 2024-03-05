@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\ComandaCategoria;
 use App\Models\ComandaItemPedido;
@@ -65,7 +67,7 @@ class ItemPedidoController extends Controller
 
         $dados["Pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Pedido.Itens", $dados);
+        return view("Comanda.Pedido.Itens", $dados);
     }
 
     /**

@@ -9,16 +9,13 @@ use App\Models\Produto;
 class DeliveryProdutoController extends Controller{
 
     public function detalhe($id){
+        $cliente_id             = session('usuario_delivery_logado')->id ?? null;
+        if(!$cliente_id){
+            return redirect()->route('deliverylogin.login')->with('msg_erro', "Você precisa está logado.");
+        }
         $dados["produto"]       = Produto::find($id);
         $dados["opcoes"]        = DeliveryProdutoOpcao::where("produto_id",$id)->get();
-       /* foreach($dados["opcoes"] as $op){
-            echo ($op->opcao->nome);
-            foreach($op->opcao->itens as $it){
-                i($it);
-            }
-        }
 
-        exit;*/
         return view("Delivery.Produto.Detalhe", $dados);
     }
 

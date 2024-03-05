@@ -1,9 +1,9 @@
 @php
     if (session('tipo') == 'admin') {
-        $extend = 'Admin.template';
+        $extend = 'Comanda.Admin.template';
         $vendedor = $pedido->admin->nome ?? null;
     } elseif (session('tipo') == 'garcon') {
-        $extend = 'Garcon.template';
+        $extend = 'Comanda.Garcon.template';
         $vendedor = $pedido->garcon->nome ?? null;
     }
 @endphp
@@ -151,7 +151,7 @@
         <div class="px-4 px-ms-4 pb-3 width-100 d-inline-block">
             <span class="d-block text-center h4 mb-0 p-2">Inserir Item</span>
             <span class="text-label">Digite quantidade</span>
-            <input type="text" class="form-campo p-2 mb-3" name="quantidade">
+            <input type="text" class="form-campo p-2 mb-3" name="quantidade" value="1">
 
         </div>
         <div class="tfooter end">

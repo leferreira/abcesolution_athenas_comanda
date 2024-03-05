@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\ComandaCategoria;
 use App\Models\ComandaItemPedido;
@@ -67,7 +69,7 @@ class ItemPedidoClienteController extends Controller
 
         $dados["Pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Pedido.Itens", $dados);
+        return view("Comanda.Pedido.Itens", $dados);
     }
 
     /**
@@ -96,7 +98,7 @@ class ItemPedidoClienteController extends Controller
             if($h){
                 $h->delete();
             }
-            ComandaPedido::somarTotal($h->Pedido_id);
+            ComandaPedido::somarTotal($h->pedido_id);
             return redirect()->back()->with('msg_sucesso', "item apagado com sucesso.");
         }catch (\Exception $e){
             return redirect()->back()->with('msg_erro', "Erro: " . $e->getMessage());

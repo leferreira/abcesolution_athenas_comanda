@@ -20,7 +20,16 @@ function formataNumeroBr($numero, $dec = 2)
 {
     return number_format( $numero, $dec, ',', '.' );
 }
+function primeiroNome($nome){
+    $partes = explode(' ', $nome);
+    return  array_shift($partes);
+}
 
+
+function ultimoNome($nome){
+    $partes = explode(' ', $nome);
+    return array_pop($partes);
+}
 //função limata caracteres
 function limita_caracteres($texto, $limite, $quebra = true){
     $tamanho = strlen($texto);

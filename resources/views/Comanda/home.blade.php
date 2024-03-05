@@ -1,4 +1,4 @@
-@extends('template')
+@extends('Comanda.template')
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido border p-1 radius-4 bg-branco">

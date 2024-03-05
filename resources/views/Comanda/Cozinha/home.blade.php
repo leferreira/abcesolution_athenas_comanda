@@ -1,10 +1,10 @@
 @php
     if (session('tipo') == 'admin') {
-        $extend = 'Admin.template';
+        $extend = 'Comanda.Admin.template';
     } elseif (session('tipo') == 'garcon') {
-        $extend = 'Garcon.template';
+        $extend = 'Comanda.Garcon.template';
     } elseif (session('tipo') == 'cozinha') {
-        $extend = 'Cozinha.template';
+        $extend = 'Comanda.Cozinha.template';
     }
 @endphp
 

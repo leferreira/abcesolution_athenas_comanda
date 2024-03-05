@@ -1,4 +1,4 @@
-@extends('Admin.template')
+@extends('Comanda.Admin.template')
 @section('conteudo')
     <div class="col-12 py-3">
 

@@ -1,4 +1,4 @@
-@extends('Cozinha.template')
+@extends('Comanda.Cozinha.template')
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido ordem">
@@ -9,7 +9,7 @@
                         <div class="rows">
                             <div class="col-12 mb-3 ">
                                 <div class="bg-normal">
-                                    <span class="d-block p-1 px-4 h6 mb-0"><b>Ordem enviados para a cozinha</b></span>
+                                    <span class="d-block p-1 px-4 h6 mb-0"><b>Itens do Pedido</b></span>
                                     <div class="pb-1 scroll-260" style="padding:0 5px;">
                                         <table class="tabela border min limpa" width="100%" cellpadding="0"
                                             cellspacing="0">
@@ -22,13 +22,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($pedidos as $pedido)
+                                                @foreach ($pedidos as $ped)
                                                     <tr class="bg-branco">
-                                                        <td class="text-left">{{ $pedido->id }}</td>
-                                                        <td class="text-center">{{ $pedido->mesa->nome ?? null }}</td>
-                                                        <td class="text-center">{{ $pedido->hora_abertura }}</td>
+                                                        <td class="text-left">{{ $ped->id }}</td>
+                                                        <td class="text-center">{{ $ped->mesa->nome ?? null }}</td>
+                                                        <td class="text-center">{{ $ped->hora_abertura }}</td>
                                                         <td class="text-right">
-                                                            <a href="{{ route('cozinha.show', $pedido->id) }}"
+                                                            <a href="{{ route('cozinha.show', $ped->id) }}"
                                                                 class="fas fa-edit btn btn-azul mx-1" title="Excluir">
                                                             </a>
                                                         </td>
@@ -63,7 +63,7 @@
                         <div id="tabs" class="p-2">
                             @php $cont = 1 @endphp
 
-                            <div id="tabs-{{ $cont++ }}">
+                            <div>
                                 <div class="rows rows2">
                                     @foreach ($pedido->itens as $item)
                                         <div class="col-2 d-flex mb-3">
@@ -72,6 +72,10 @@
                                                 <div class="home-mesa">
                                                     <span class="tt">{{ $item->produto->nome }}</span>
                                                 </div>
+                                                @foreach ($item->opcoes as $opcao)
+                                                    <p><small>{{ $opcao->quantidade }}
+                                                            {{ $opcao->opcaoItem->nome }}</small></p>
+                                                @endforeach
                                             </div>
                                         </div>
                                     @endforeach

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Comanda;
 use App\Models\ComandaCategoria;
@@ -14,6 +16,10 @@ use stdClass;
 
 class CozinhaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkUserType:admin,garcon,cozinha');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +27,7 @@ class CozinhaController extends Controller
     {
         $dados["pedidos"]    = ComandaPedido::where(["status_id"=>config("constantes.status.ENVIADO_PARA_COZINHA")])->get();
 
-        return view("Cozinha.home", $dados);
+        return view("Comanda.Cozinha.home", $dados);
 
     }
 
@@ -98,8 +104,9 @@ class CozinhaController extends Controller
     {
         $dados["pedidos"]   = ComandaPedido::where(["status_id"=>config("constantes.status.ENVIADO_PARA_COZINHA")])->get();
         $dados["pedido"]    = ComandaPedido::find($id);
+
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Cozinha.Itens", $dados);
+        return view("Comanda.Cozinha.Itens", $dados);
     }
 
     /**
@@ -109,7 +116,7 @@ class CozinhaController extends Controller
     {
         $dados["pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Comanda.Itens", $dados);
+        return view("Comanda.Comanda.Itens", $dados);
     }
 
     /**

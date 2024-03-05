@@ -3,7 +3,7 @@
         <a href="" class="mobmenu"><i class="fas fa-bars"></i></a>
         <a href="" class="logo"></a>
         <div class="menu-topo-text d-none">
-            @include('menu')
+            @include('Comanda.menu')
         </div>
         <div class="menu-topo-text">
             <ul>
@@ -15,13 +15,15 @@
                     <ul class="usuario">
                         <li><a href="{{ route('cardapio.index') }}"><i class="fas fa-home"></i> Home</a></li>
 
-                        <li><a href="{{ route('pedidocliente.index') }}"><i class="fas fa-address-book"></i> Meus
-                                Pedidos</a>
-                        </li>
-                        @if (!Auth::check())
+
+                        @if (!session()->has('cliente'))
                             <li><a href="{{ route('cliente.create') }}"><i class="fas fa-user-alt"></i> Cadastrar</a>
                             </li>
                             <li><a href="{{ route('login') }}"><i class="fas fa-user-alt"></i> Login</a></li>
+                        @else
+                            <li><a href="{{ route('pedidocliente.index') }}"><i class="fas fa-address-book"></i> Meus
+                                    Pedidos</a>
+                            </li>
                         @endif
 
 
@@ -29,7 +31,7 @@
 
                 <ul class="usuario">
                     <li>
-                        @if (Auth::check())
+                        @if (session()->has('cliente'))
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout

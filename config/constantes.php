@@ -45,9 +45,10 @@ return [
         'PEDIDO_PRONTO' => 42,
     ],
 
-    'tipo_produto' => [
-        'PRODUTO' => 1, // Acesso irrestrito
-        'SERVICO' => 2, //Acesso irrestristo no escopo da Empresa
+    'tipo_pedido' => [
+        'COMANDA_GARCON' => 1,
+        'COMANDA_CLIENTE' => 2,
+        'DELIVERY' => 3,
     ],
 
     'perfil' => [

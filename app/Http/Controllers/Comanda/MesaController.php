@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Mesa;
 use Illuminate\Http\Request;
@@ -13,7 +15,7 @@ class MesaController extends Controller
     public function index()
     {
         $dados["mesas"] = Mesa::get();
-        return view("Mesa.home", $dados);
+        return view("Comanda.Mesa.home", $dados);
     }
 
     /**

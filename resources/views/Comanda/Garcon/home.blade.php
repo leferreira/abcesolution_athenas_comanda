@@ -1,4 +1,4 @@
-@extends('Garcon.template')
+@extends('Comanda.Garcon.template')
 @section('conteudo')
     <div class="col-12 py-3">
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\ComandaUsuario;
 use Illuminate\Http\Request;
@@ -11,7 +13,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('Login');
+        return view('Comanda.Login');
     }
 
     public function logar(Request $request)
@@ -23,7 +25,8 @@ class LoginController extends Controller
             Auth::login($user);
             return $this->redirectTo($user);
         }
-        exit;
+echo "não achei";
+exit;
         return back()->withErrors([
             'email' => 'As credenciais fornecidas não correspondem aos nossos registros.',
         ]);
@@ -32,16 +35,16 @@ class LoginController extends Controller
     protected function redirectTo($user)
     {
         if ($user->admin()->exists()) {
-            session(['admin_id' => $user->admin_id, "tipo" =>'admin']);
+            session(['admin' => $user->admin, "tipo" =>'admin']);
             return redirect()->route('admin.index');
         } elseif ($user->garcon()->exists()) {
-            session(['garcon_id' => $user->garcon_id, "tipo" =>'garcon']);
+            session(['garcon' => $user->garcon, "tipo" =>'garcon']);
             return redirect()->route('garcon.index');
         } elseif ($user->cozinha()->exists()) {
-            session(['cozinha_id' => $user->cozinha_id, "tipo" =>'cozinha']);
+            session(['cozinha' => $user->cozinha, "tipo" =>'cozinha']);
             return redirect()->route('cozinha.index');
         } elseif ($user->cliente()->exists()) {
-            session(['cliente_id' => $user->cliente_id, "tipo" =>'cliente']);
+            session(['cliente' => $user->cliente, "tipo" =>'cliente']);
             return redirect()->route('cardapio.index');
         }
 

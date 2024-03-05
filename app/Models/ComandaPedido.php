@@ -22,12 +22,13 @@ class ComandaPedido extends Model
         'data_fechamento',
         'hora_fechamento',
         'identificacao',
-        'online',
+        'tipo_pedido',
         'total',
+        'tipo_pedido'
     ];
 
     public function cliente(){
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(ComandaCliente::class);
     }
 
     public function status(){
@@ -52,7 +53,9 @@ class ComandaPedido extends Model
 
     public static function somarTotal($id){
         $pedido             = ComandaPedido::find($id);
-        $pedido->total      = ComandaItemPedido::where("pedido_id", $id)->sum("subtotal");
-        $pedido->save();
+        if($pedido){
+            $pedido->total      = ComandaItemPedido::where("pedido_id", $id)->sum("subtotal");
+            $pedido->save();
+        }
     }
 }

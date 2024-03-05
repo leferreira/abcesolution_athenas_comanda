@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriaAdicionalsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateCategoriaAdicionalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_adicionals', function (Blueprint $table) {
+        Schema::create('comanda_tipo_usuarios', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 30)->nullable();
-            $table->integer('limite_escolha')->nullable();
-            $table->boolean('adicional')->nullable()->default(false);
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateCategoriaAdicionalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categoria_adicionals');
+        Schema::dropIfExists('comanda_tipo_usuarios');
     }
-}
+};

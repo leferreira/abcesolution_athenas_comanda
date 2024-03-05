@@ -1,22 +1,28 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CardapioController;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\CozinhaController;
+use App\Http\Controllers\Comanda\AdminController;
+use App\Http\Controllers\Comanda\CardapioController;
+use App\Http\Controllers\Comanda\ClienteController;
+use App\Http\Controllers\Comanda\CozinhaController;
+use App\Http\Controllers\Comanda\GarconController;
+use App\Http\Controllers\Comanda\HomeController;
+use App\Http\Controllers\Comanda\ItemPedidoClienteController;
+use App\Http\Controllers\Comanda\ItemPedidoController;
+use App\Http\Controllers\Comanda\LoginController;
+use App\Http\Controllers\Comanda\MesaController;
+use App\Http\Controllers\Comanda\PedidoClienteController;
+use App\Http\Controllers\Comanda\PedidoController;
+use App\Http\Controllers\Delivery\CartaoController;
 use App\Http\Controllers\Delivery\ClienteWebController;
 use App\Http\Controllers\Delivery\DeliveryCategoriaController;
+use App\Http\Controllers\Delivery\DeliveryClienteController;
+use App\Http\Controllers\Delivery\DeliveryItemPedidoController;
+use App\Http\Controllers\Delivery\DeliveryLoginController;
 use App\Http\Controllers\Delivery\DeliveryPedidoController;
 use App\Http\Controllers\Delivery\DeliveryProdutoController;
 use App\Http\Controllers\Delivery\HomeWebController;
-use App\Http\Controllers\GarconController;
-use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ItemPedidoClienteController;
-use App\Http\Controllers\ItemPedidoController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MesaController;
-use App\Http\Controllers\PedidoClienteController;
+use App\Http\Controllers\Delivery\PagamentoController;
+use App\Http\Controllers\Delivery\PixController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -26,6 +32,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/', [HomeController::class, "index"] )->name("home");
 Route::resource('cardapio', CardapioController::class);
 Route::resource('cliente', ClienteController::class);
+Route::resource('mesa', MesaController::class);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/pedido/novo/{id}',[PedidoController::class,"novo"])->name("pedido.novo");
@@ -36,32 +43,43 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pedido', PedidoController::class);
     Route::resource('itempedido', ItemPedidoController::class);
 
-    Route::resource('mesa', MesaController::class);
     Route::resource('admin', AdminController::class);
     Route::resource('garcon', GarconController::class);
     Route::resource('cozinha', CozinhaController::class);
 });
 
+
+Route::get('/pedidocliente/novo/{id}',[PedidoClienteController::class,"novo"])->name("pedidocliente.novo");
+Route::get('/pedidocliente/enviarPedido/{id}',[PedidoClienteController::class,"enviarPedido"])->name("pedidocliente.enviarPedido");
+Route::resource('pedidocliente', PedidoClienteController::class);
+Route::resource('itempedidocliente', ItemPedidoClienteController::class);
+
+Route::get('/deliverylogin', [DeliveryLoginController::class, 'index'])->name('deliverylogin.login');
+Route::post('/deliverylogin/logar', [DeliveryLoginController::class, 'logar'])->name('deliverylogin.logar');
+Route::post('/deliverylogin/logout', [DeliveryLoginController::class, 'logout'])->name('deliverylogin.logout');
+
+Route::resource('deliverycliente', DeliveryClienteController::class);
 Route::group(['prefix'=>'delivery','as'=>'delivery.'], function () {
     Route::get('/',[HomeWebController::class, 'index'])->name('home');
-    Route::get('/login',[ClienteWebController::class, 'login'])->name('login');
-    Route::post('/logar',[ClienteWebController::class, 'logar'])->name('logar');
-    Route::get('/logoff',[ClienteWebController::class, 'logoff'])->name('logoff');
-    Route::get('/cadastro',[ClienteWebController::class, 'create'])->name('cadastro');
-    Route::post('/cliente/salvar',[ClienteWebController::class, 'salvar'])->name('cliente.salvar');
 
     Route::resource('/deliverycategoria',DeliveryCategoriaController::class);
 
     Route::get('/deliveryproduto/detalhe/{id}',[DeliveryProdutoController::class,"detalhe"])->name("deliveryproduto.detalhe");
 
+    Route::resource('/deliveryitempedido',DeliveryItemPedidoController::class);
     Route::resource('/deliveryproduto',DeliveryProdutoController::class);
+
+    Route::get('/pagamento/finalizarPedido/{id}',[PagamentoController::class,"finalizarPedido"])->name("pagamento.finalizarPedido");
+
+    Route::get('/deliverypedido',[DeliveryPedidoController::class,"index"])->name("deliverypedido.index");
+    Route::get('/deliverypedido/pagamento/{id}',[DeliveryPedidoController::class,"pagamento"])->name("deliverypedido.pagamento");
     Route::post('/deliverypedido/salvar',[DeliveryPedidoController::class,"salvar"])->name("deliverypedido.salvar");
+
+    Route::get('/cartao/ver/{id}',[CartaoController::class, 'ver'])->name('cartao.ver');
+    Route::get('/pix/ver/{id}',[PixController::class, 'ver'])->name('pix.ver');
+
 
 });
 
 
-    Route::get('/pedidocliente/enviarPedido/{id}',[PedidoClienteController::class,"enviarPedido"])->name("pedidocliente.enviarPedido");
-    Route::resource('pedidocliente', PedidoClienteController::class);
-
-    Route::resource('itempedidocliente', ItemPedidoClienteController::class);
 

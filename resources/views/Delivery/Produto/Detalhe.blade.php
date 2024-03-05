@@ -361,7 +361,8 @@
                         if (response.tem_erro == true) {
                             alert(response.erro)
                         } else {
-                            alert('tudo ok')
+                            alert('Pedido realizado com sucesso');
+                            window.location.href = base_url + 'delivery';
                         }
                     },
                     error: function(xhr, status, error) {

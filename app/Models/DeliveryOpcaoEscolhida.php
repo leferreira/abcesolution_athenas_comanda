@@ -26,6 +26,6 @@ class DeliveryOpcaoEscolhida extends Model
     }
 
     public function pedido(){
-        return $this->belongsTo(DeliveryPedido::class, 'pedido_id');
+        return $this->belongsTo(ComandaPedido::class, 'pedido_id');
     }
 }

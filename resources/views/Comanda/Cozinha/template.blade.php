@@ -21,7 +21,7 @@
 
 <body>
     <div class="site">
-        @include('Cozinha.cabecalho')
+        @include('Comanda.Cozinha.cabecalho')
         @include('inc.erros')
         @include('inc.msg')
         <div id="mostrarErros"></div>

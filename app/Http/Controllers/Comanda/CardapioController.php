@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
 
+use App\Http\Controllers\Controller;
 use App\Models\Comanda;
 use App\Models\ComandaCategoria;
+use App\Models\ComandaPedido;
 use App\Models\Empresa;
 use App\Models\Mesa;
 use App\Models\PedidoComanda;
@@ -19,8 +21,10 @@ class CardapioController extends Controller
      */
     public function index()
     {
-        $dados["categorias"]= ComandaCategoria::get();
-        return view("Cardapio.home", $dados);
+        /*$dados["categorias"]= ComandaCategoria::get();
+        return view("Comanda.Cardapio.home", $dados);*/
+        $dados["mesas"] = Mesa::get();
+        return view("Comanda.Cardapio.mesa", $dados);
     }
 
     /**
@@ -54,7 +58,7 @@ class CardapioController extends Controller
             $pedido->comanda_id    = $mesa->comanda_id;
             $pedido->data_abertura = hoje();
             $pedido->hora_abertura = agora();
-            $pedido                = PedidoComanda::create(objToArray($pedido));
+            $pedido                = ComandaPedido::create(objToArray($pedido));
 
             return redirect()->route('pedido.edit', $pedido->id)->with('msg_sucesso', "Cliente Inserido com sucesso.");
 
@@ -95,13 +99,13 @@ class CardapioController extends Controller
     public function show($id )
     {
         $mesa = Mesa::find($id);
-        $pedido = PedidoComanda::where(["comanda_id"=>$mesa->comanda_id])->first();
+        $pedido = ComandaPedido::where(["comanda_id"=>$mesa->comanda_id])->first();
         return redirect()->route('pedido.edit', $pedido->id);
     }
 
     public function enviarCozinha($id )
     {
-        $pedido = PedidoComanda::find($id);
+        $pedido = ComandaPedido::find($id);
         $pedido->status_id = config("constantes.status.ENVIADO_PARA_COZINHA");
         $pedido->save();
         Mesa::find($pedido->mesa_id)->update(["status_id"=> $pedido->status_id]);
@@ -111,7 +115,7 @@ class CardapioController extends Controller
     public function pedidoPronto($id )
     {
 
-        $pedido = PedidoComanda::find($id);
+        $pedido = ComandaPedido::find($id);
         $pedido->status_id = config("constantes.status.PEDIDO_PRONTO");
         $pedido->save();
 
@@ -123,7 +127,7 @@ class CardapioController extends Controller
     public function entegarPedido($id )
     {
         $mesa = Mesa::find($id);
-        $pedido = PedidoComanda::where(["comanda_id"=>$mesa->comanda_id])->first();
+        $pedido = ComandaPedido::where(["comanda_id"=>$mesa->comanda_id])->first();
         $pedido->status_id = config("constantes.status.ENTREGUE");
         $pedido->save();
 
@@ -134,7 +138,7 @@ class CardapioController extends Controller
 
     public function finalizarPedido($id )
     {
-        $pedido = PedidoComanda::find($id);
+        $pedido = ComandaPedido::find($id);
         $pedido->status_id = config("constantes.status.FINALIZADO");
         $pedido->save();
 
@@ -148,9 +152,9 @@ class CardapioController extends Controller
      */
     public function edit($id )
     {
-        $dados["pedido"]    = PedidoComanda::find($id);
+        $dados["pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Comanda.Itens", $dados);
+        return view("Comanda.Comanda.Itens", $dados);
     }
 
     /**

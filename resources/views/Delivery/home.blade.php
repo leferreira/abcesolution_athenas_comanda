@@ -20,7 +20,8 @@
                             <div>
                                 <div class="fw-700 text-uppercase">{{ $prod->nome }}</div>
                                 <div>Peso aproximado de 700 a 750 gramas.</div>
-                                <span class="produto-preco"><span class="fw-700 d-block mt-3"> R$ 27.90</span></span>
+                                <span class="produto-preco"><span class="fw-700 d-block mt-3"> R$
+                                        {{ $prod->valor_venda }}</span></span>
                             </div>
 
                             <div class="thumb">
@@ -35,34 +36,48 @@
 
     </div>
 
-    <div class="col-2 fixed-bar">
-        <div class="scroll-item">
-            @foreach ($pedido->itens as $item)
-                <div class="cx">
-                    <strong>{{ $item->produto->nome }}</strong>
-                    <div class="itens">
-                        <div class="border-right">
-                            @foreach ($item->opcoes as $opcao)
-                                <small>{{ $opcao->opcaoItem->nome }}</small>
-                            @endforeach
+    @if ($pedido)
+        <div class="col-2 fixed-bar">
+            <div class="scroll-item">
+                @foreach ($pedido->itens as $item)
+                    <div class="cx">
+                        <strong>{{ $item->produto->nome }}</strong>
+                        <div class="itens">
+                            <div class="border-right">
+                                @foreach ($item->opcoes as $opcao)
+                                    <small>{{ $opcao->opcaoItem->nome }}</small>
+                                @endforeach
+                            </div>
+                            <div>
+                                <span class="fw-700 d-block text-center">R$ {{ $pedido->total }}</span>
+                            </div>
                         </div>
-                        <div>
-                            <span class="fw-700 d-block text-center">R$27,00</span>
+                        <div class="add">
+
+
+                            <a href="#"
+                                onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $item->id }}').submit() : '';"
+                                title="Ecluir"><i class="fas fa-trash text-vermelho"></i></a>
+                            <form action="{{ route('delivery.deliveryitempedido.destroy', $item->id) }}" method="POST"
+                                id="apagar{{ $item->id }}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                {{ csrf_field() }}
+                            </form>
+                            </td>
+
+                            <span>1</span>
+                            <a href="" class="fas fa-plus-circle text-azul"></a>
                         </div>
                     </div>
-                    <div class="add">
-                        <a href="" class="fas fa-trash text-vermelho"></a>
-                        <span>1</span>
-                        <a href="" class="fas fa-plus-circle text-azul"></a>
-                    </div>
-                </div>
-            @endforeach
+                @endforeach
 
 
 
 
 
+            </div>
+            <a href="{{ route('delivery.deliverypedido.pagamento', $pedido->id) }}" class="btn btn-azul mt-4 ">Finalizar
+                pedido</a>
         </div>
-        <a href="" class="btn btn-azul mt-4 ">Finalizar pedido</a>
-    </div>
+    @endif
 @endsection

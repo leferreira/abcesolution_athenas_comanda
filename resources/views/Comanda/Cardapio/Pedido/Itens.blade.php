@@ -1,4 +1,4 @@
-@extends('Cardapio.template')
+@extends('Comanda.Cardapio.template')
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido ordem">
@@ -9,7 +9,7 @@
                             <div class="col-12 p-1 px-4 h3 mb-0"><b>Pedido:</b> <span
                                     class="text-azul">{{ $pedido->id ?? null }}</span></div>
                             <div class="col-6 mb-3">
-                                <span class="px-3"><b>Cliente:</b> {{ $pedido->cliente->nome_razao_social }}</span>
+                                <span class="px-3"><b>Cliente:</b> {{ $pedido->cliente->nome ?? null }}</span>
                                 <span class="px-3"><b>Abertura:</b>{{ databr($pedido->data_abertura) }}
                                     {{ $pedido->hora_abertura }}</span>
                             </div>
@@ -22,7 +22,7 @@
                         <div class="rows">
                             <div class="col-12 mb-3 ">
                                 <div class="bg-normal">
-                                    <span class="d-block p-1 px-4 h6 mb-0"><b>Ordem enviados para a cozinha</b></span>
+                                    <span class="d-block p-1 px-4 h6 mb-0"><b>Itens do Pedido</b></span>
                                     <div class="pb-1 scroll-260" style="padding:0 5px;">
                                         <table class="tabela border min limpa" width="100%" cellpadding="0"
                                             cellspacing="0">
@@ -129,13 +129,13 @@
     }
 </script>
 
-<form action="{{ route('itempedido.store') }}" method="POST">
+<form action="{{ route('itempedidocliente.store') }}" method="POST">
     @csrf
     <div class="window menor" id="modalQtde">
         <div class="px-4 px-ms-4 pb-3 width-100 d-inline-block">
             <span class="d-block text-center h4 mb-0 p-2">Inserir Item</span>
             <span class="text-label">Digite quantidade</span>
-            <input type="text" class="form-campo p-2 mb-3" name="quantidade">
+            <input type="text" class="form-campo p-2 mb-3" name="quantidade" value="1">
 
         </div>
         <div class="tfooter end">

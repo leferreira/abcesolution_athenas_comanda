@@ -3,7 +3,7 @@
         <a href="" class="mobmenu"><i class="fas fa-bars"></i></a>
         <a href="" class="logo"></a>
         <div class="menu-topo-text d-none">
-            @include('menu')
+            @include('Comanda.menu')
         </div>
         <div class="menu-topo-text">
             <ul>

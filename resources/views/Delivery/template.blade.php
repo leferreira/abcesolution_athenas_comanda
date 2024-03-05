@@ -47,11 +47,17 @@
     <script src="{{ asset('assets/delivery/js/jquery.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script src="{{ asset('assets/delivery/js/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/delivery/js/datatables/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/delivery/js/js.js') }}"></script>
-    <script src="{{ asset('assets/delivery/js/componentes/js_modal.js') }}"></script>
-    <script src="{{ asset('assets/delivery/js/componentes/js_data_table.js') }}"></script>
+
+
+    <script src="{{ asset('assets/js/jquery.mask.js') }}"></script>
+
+    <script src="{{ asset('assets/js/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datatables/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/componentes/js/js_util.js') }}"></script>
+    <script src="{{ asset('assets/componentes/js/js_mascara.js') }}"></script>
+    <script src="{{ asset('assets/js/componentes/js_modal.js') }}"></script>
+    <script src="{{ asset('assets/js/componentes/js_data_table.js') }}"></script>
+    <script src="{{ asset('assets/js/js.js') }}"></script>
 
 
 </body>

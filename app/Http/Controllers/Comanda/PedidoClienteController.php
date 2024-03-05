@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comanda;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Cliente;
 use App\Models\Comanda;
@@ -28,10 +30,15 @@ class PedidoClienteController extends Controller
      */
     public function index()
     {
-        $cliente = Cliente::first();
+        $usuario     = Auth::user();
+        $cliente = $usuario->cliente ?? null;
+        if(!$cliente){
+            return redirect()->route('cardapio.index');
+        }
+
         $dados["lista"]     = ComandaPedido::where("cliente_id",$cliente->id)->get();
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Cardapio.Pedido.index", $dados);
+        return view("Comanda.Cardapio.Pedido.index", $dados);
     }
 
     /**
@@ -42,24 +49,57 @@ class PedidoClienteController extends Controller
         //
     }
 
+    public function novo($id)
+    {
+        try {
+            $mesa                   = Mesa::find($id);
 
+
+            if(!$mesa){
+                throw new Exception("Mesa não encontrada ");
+            }
+
+            if($mesa->status_id != config("constantes.status.ATIVO")){
+                throw new Exception("Mesa Ocupada ");
+            }
+
+            $pedido                = new stdClass;
+            $pedido->mesa_id       = $mesa->id;
+            $pedido->garcon_id     = null;
+            $pedido->admin_id      = null;
+            $pedido->empresa_id    = $mesa->empresa_id;
+            $pedido->status_id     = config("constantes.status.ABERTO");
+            $pedido->comanda_id    = $mesa->comanda_id;
+            $pedido->tipo_pedido   = config("constantes.tipo_pedido.COMANDA_CLIENTE");
+            $pedido->data_abertura = hoje();
+            $pedido->hora_abertura = agora();
+
+            $pedido                = ComandaPedido::create(objToArray($pedido));
+
+            return redirect()->route('pedidocliente.edit', $pedido->id);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('msg_erro', $e->getMessage());
+        }
+    }
 
     public function store(Request $request)
     {
         try {
 
             $usuario     = Auth::user();
-            if(!$usuario){
+            $cliente = $usuario->cliente ?? null;
+            if(!$cliente){
                 throw new Exception("Selecione  um Cliente");
             }
 
             $pedido = new stdClass;
-            $pedido->cliente_id    = $usuario->cliente->id ?? null;
+            $pedido->cliente_id    = $cliente->id ;
             $pedido->empresa_id    = $usuario->empresa_id;
             $pedido->status_id     = config("constantes.status.ABERTO");
             $pedido->data_abertura = hoje();
             $pedido->hora_abertura = agora();
-            $pedido->online        = 'S';
+            $pedido->tipo_pedido   = config("constantes.tipo_pedido.COMANDA_CLIENTE");
             $pedido                = ComandaPedido::create(objToArray($pedido));
 
             if($pedido){
@@ -144,7 +184,7 @@ class PedidoClienteController extends Controller
     {
         $dados["pedido"]    = ComandaPedido::find($id);
         $dados["categorias"]= ComandaCategoria::get();
-        return view("Cardapio.Pedido.Itens", $dados);
+        return view("Comanda.Cardapio.Pedido.Itens", $dados);
     }
 
     /**

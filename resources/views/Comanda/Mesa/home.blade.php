@@ -1,9 +1,11 @@
 @php
     if (session('tipo') == 'admin') {
-        $extend = 'Admin.template';
+        $extend = 'Comanda.Admin.template';
     } elseif (session('tipo') == 'garcon') {
-        $extend = 'Garcon.template';
+        $extend = 'Comanda.Garcon.template';
     }
+
+    $extend = 'Comanda.Garcon.template';
 @endphp
 
 @extends($extend)
@@ -15,9 +17,12 @@
             @foreach ($mesas as $mesa)
                 <div class="col-2 d-flex mb-3">
                     <div class="caixa {{ $mesa->status_id == config('constantes.status.ABERTO') ? 'comanda-ativo' : '' }} ">
+
                         <div class="home-mesa">
+
                             <img src="{{ asset('assets/img/mesa.svg') }}" class="img-fluido">
                             <span class="tt">{{ $mesa->nome }}</span>
+
                         </div>
                         <div class="botoes">
                             @if (

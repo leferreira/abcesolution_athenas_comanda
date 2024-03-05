@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTamanhoPizzasTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTamanhoPizzasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tamanho_pizzas', function (Blueprint $table) {
+        Schema::create('delivery_tipo_selecaos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 20)->nullable();
-            $table->integer('pedacos')->nullable();
-            $table->integer('maximo_sabores')->nullable();
+            $table->string('tipo');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateTamanhoPizzasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tamanho_pizzas');
+        Schema::dropIfExists('delivery_tipo_selecaos');
     }
-}
+};
