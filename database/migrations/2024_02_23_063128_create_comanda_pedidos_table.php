@@ -37,7 +37,7 @@ return new class extends Migration
             $table->foreign('admin_id')->references('id')->on('comanda_admins');
 
             $table->string('online',1)->default('N');
-            $table->index('tipo_pedido'); //1 - Mesa / 2 - cliente mesa / 3 - Delivery
+            $table->integer('tipo_pedido'); //1 - Mesa / 2 - cliente mesa / 3 - Delivery
             $table->date('data_abertura')->nullable();
             $table->time('hora_abertura')->nullable();
 
