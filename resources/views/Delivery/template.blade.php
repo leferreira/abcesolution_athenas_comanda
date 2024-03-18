@@ -40,7 +40,7 @@
         </div>
 
         <div class="footer">
-            <p>copyRigth - mjailton 2022</p>
+            <p>© Copyright 2024 abcesolution.com.br - All Rights Reserved</p>
         </div>
     </div>
 

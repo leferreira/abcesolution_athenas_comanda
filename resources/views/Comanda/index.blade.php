@@ -28,14 +28,14 @@
 
                     <?php
                     @$link = $_GET['link'];
-                    
+
                     $pag[1] = 'home.php';
                     $pag[2] = 'ordem.php';
                     $pag[3] = 'del-comanda.php';
                     $pag[4] = 'ordem-enviados.php';
                     $pag[5] = 'fechar-conta.php';
                     $pag[6] = 'pagamento-finalizado.php';
-                    
+
                     if (!empty($link)) {
                         if (file_exists($pag[$link])) {
                             include $pag[$link];
@@ -45,7 +45,7 @@
                     } else {
                         include 'home.php';
                     }
-                    
+
                     ?>
 
                 </div>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="footer">
-            <p>copyRigth - mjailton 2022</p>
+            <p>© Copyright 2024 abcesolution.com.br - All Rights Reserved</p>
         </div>
     </div>
 
