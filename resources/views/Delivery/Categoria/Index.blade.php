@@ -21,7 +21,8 @@
                             <small class="tt2">R$ {{ $p->produto->valor_venda }}</small>
                         </div>
                         <div class="botoes bg-normal">
-                            <a href="index.php?link=2" class="btn btn-verde2">Atender</a>
+                            <a href="{{ route('delivery.deliveryproduto.detalhe', $p->id) }}"
+                                class="btn btn-verde2">Detalhes</a>
                         </div>
                     </div>
                 </div>

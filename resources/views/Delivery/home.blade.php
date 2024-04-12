@@ -19,7 +19,7 @@
                             style=" align-items: center;">
                             <div>
                                 <div class="fw-700 text-uppercase">{{ $prod->nome }}</div>
-                                <div>Peso aproximado de 700 a 750 gramas.</div>
+                                <!--<div>Peso aproximado de 700 a 750 gramas.</div>-->
                                 <span class="produto-preco"><span class="fw-700 d-block mt-3"> R$
                                         {{ $prod->valor_venda }}</span></span>
                             </div>
@@ -49,7 +49,7 @@
                                 @endforeach
                             </div>
                             <div>
-                                <span class="fw-700 d-block text-center">R$ {{ $pedido->total }}</span>
+                                <span class="fw-700 d-block text-center">R$ {{ $item->subtotal }}</span>
                             </div>
                         </div>
                         <div class="add">
@@ -66,7 +66,8 @@
                             </td>
 
                             <span>1</span>
-                            <a href="" class="fas fa-plus-circle text-azul"></a>
+                            <a href="{{ route('delivery.deliverypedido.addItem', ['pedido_id' => $item->pedido_id, 'produto_id' => $item->produto_id]) }}"
+                                class="fas fa-plus-circle text-azul"></a>
                         </div>
                     </div>
                 @endforeach
@@ -77,7 +78,7 @@
 
             </div>
             <a href="{{ route('delivery.deliverypedido.pagamento', $pedido->id) }}" class="btn btn-azul mt-4 ">Finalizar
-                pedido</a>
+                pedido - ({{ $pedido->total }})</a>
         </div>
     @endif
 @endsection

@@ -25,8 +25,7 @@ class LoginController extends Controller
             Auth::login($user);
             return $this->redirectTo($user);
         }
-echo "não achei";
-exit;
+
         return back()->withErrors([
             'email' => 'As credenciais fornecidas não correspondem aos nossos registros.',
         ]);

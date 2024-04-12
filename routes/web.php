@@ -74,6 +74,7 @@ Route::group(['prefix'=>'delivery','as'=>'delivery.'], function () {
     Route::get('/deliverypedido',[DeliveryPedidoController::class,"index"])->name("deliverypedido.index");
     Route::get('/deliverypedido/pagamento/{id}',[DeliveryPedidoController::class,"pagamento"])->name("deliverypedido.pagamento");
     Route::post('/deliverypedido/salvar',[DeliveryPedidoController::class,"salvar"])->name("deliverypedido.salvar");
+    Route::get('/deliverypedido/addItem/{pedido_id}/{produto_id}',[DeliveryPedidoController::class,"addItem"])->name("deliverypedido.addItem");
 
     Route::get('/cartao/ver/{id}',[CartaoController::class, 'ver'])->name('cartao.ver');
     Route::get('/pix/ver/{id}',[PixController::class, 'ver'])->name('pix.ver');

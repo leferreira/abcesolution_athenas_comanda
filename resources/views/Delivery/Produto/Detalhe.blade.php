@@ -20,8 +20,8 @@
                     <div class="thumb">
                         <img src="{{ asset($produto->imagem) }}" class="img-fluido">
                     </div>
-                    <span class="h5">Monte seu marmitex do seu jeito! Peso aproximado de 700 a 750
-                        gramas.</span>
+                    <!--<span class="h5">Monte seu marmitex do seu jeito! Peso aproximado de 700 a 750
+                                                                gramas.</span>-->
                 </div>
 
             </div>
@@ -105,13 +105,13 @@
             <div class="col-12">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="produto_id" id="produto_id" value="{{ $produto->id }}">
+                <input type="hidden" name="pedido_id" id="pedido_id" value="{{ $pedido->id ?? null }}">
                 <div class="d-flex justify-content-space-between">
                     <span class="d-flex" style="align-items:center;gap:10px">Quantidade <input type="text" name=""
-                            value="0" class="form-campo"></span>
+                            value="1" class="form-campo"></span>
                     <span class="d-flex" style="align-items:center;gap:10px">Total: <input type="text" id="total"
-                            value="0" class="form-campo"></span>
-                    <span><a href="" class="btn btn-azul">R$27,00 | Adicionar</a></span>
-                    <button type="submit" id="submit-order" class="btn btn-azul">Enviar Pedido</button>
+                            value="<?php echo $pedido->total ?? '0.00'; ?>" class="form-campo"></span>
+                    <button type="submit" id="submit-order" class="btn btn-azul">Adicionar</button>
                 </div>
             </div>
 
@@ -184,7 +184,6 @@
             $('.group').each(function() {
                 updateGroup($(this));
             });
-
 
 
             // Evento para quando os inputs mudarem
@@ -270,6 +269,7 @@
                 var formData = {
                     _token: '{{ csrf_token() }}',
                     produto_id: $("#produto_id").val(),
+                    pedido_id: $("#pedido_id").val(),
                     observacao: $("#observacao").val(),
                     inputs: [],
                     checkboxes: [],
