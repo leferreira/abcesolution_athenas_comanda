@@ -57,7 +57,7 @@
 		</div>
 
 		<div class="footer">
-			<p>copyRigth - mjailton 2022</p>
+			<p>copyRigth - abcesolution.com.br 2024</p>
 		</div>
 		</div>
 
