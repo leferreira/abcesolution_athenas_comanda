@@ -40,6 +40,7 @@
                                                     <th align="left">Item</td>
                                                     <th align="center">Qtde</td>
                                                     <th align="center">Vl. Unit.</td>
+                                                    <th align="center">Vl. Tot.</td>
                                                     <th align="center">Ação</td>
                                                 </tr>
                                             </thead>
@@ -49,14 +50,15 @@
                                                         <td class="text-left">{{ $item->produto->nome }}</td>
                                                         <td class="text-center">{{ $item->quantidade }}</td>
                                                         <td class="text-center">{{ $item->valor }}</td>
-                                                        <td class="text-right">
-                                                            <a href="javascript:;" onclick="abrirModal('#add')"
-                                                                class="fas fa-edit btn btn-azul mx-1" title="Excluir">
-                                                            </a>
-                                                            <a href="#"
-                                                                onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $item->id }}').submit() : '';"
+                                                        <td class="text-center">{{ $item->valor * $item->quantidade }}</td>
+                                                        <td class="text-center">
+                                                            {{--<a href="javascript:;" onclick="abrirModal('#add')"
+                                                                class="fas fa-edit btn btn-azul mx-1" title="Editar">
+                                                            </a>--}}
+                                                            <a href="#" onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $item->id }}').submit() : '';"
                                                                 class="d-inline-block btn btn-vermelho btn-circulo btn-pequeno"
-                                                                title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                                                                title="Excluir"><i class="fas fa-trash-alt"></i>
+                                                            </a>
                                                             <form action="{{ route('itempedido.destroy', $item->id) }}"
                                                                 method="POST" id="apagar{{ $item->id }}">
                                                                 <input type="hidden" name="_method" value="DELETE">
@@ -149,7 +151,7 @@
         <div class="px-4 px-ms-4 pb-3 width-100 d-inline-block">
             <span class="d-block text-center h4 mb-0 p-2">Inserir Item</span>
             <span class="text-label">Digite quantidade</span>
-            <input type="text" class="form-campo p-2 mb-3" name="quantidade" value="1">
+            <input type="number" class="form-campo p-2 mb-3" name="quantidade" value="1">
 
         </div>
         <div class="tfooter end">
@@ -160,7 +162,6 @@
         </div>
     </div>
 </form>
-
 
 <div class="window medio" id="add">
     <div class="px-4 px-ms-4 width-100 d-inline-block">
