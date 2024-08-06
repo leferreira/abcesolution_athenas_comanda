@@ -39,8 +39,8 @@
                                             cellspacing="0">
                                             <thead>
                                                 <tr class="bg-branco">
-                                                    <th align="left">Qtde</td>
-                                                    <th align="center">Item</td>
+                                                    <th align="left">Item</td>
+                                                    <th align="center">Qtde</td>
                                                     <th align="center">Valor</td>
                                                     <th align="center">Ação</td>
                                                 </tr>
