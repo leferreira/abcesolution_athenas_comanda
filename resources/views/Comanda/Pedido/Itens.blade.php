@@ -13,7 +13,7 @@
     <div class="col-12 m-auto">
         <div class="pedido ordem">
             <div class="rows">
-                <div class="col-4 ordem-left">
+                <div class="col-md-5 ordem-left">
                     <div class="caixa">
                         <div class="rows rows2">
                             <div class="col-12 p-1 px-4 h3 mb-0"><b>Pedido:</b> <span
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8 ordem-right">
+                <div class="col-md-7 ordem-right">
                     <div class="caixa">
                         <div id="tabs" class="p-2">
                             <ul>

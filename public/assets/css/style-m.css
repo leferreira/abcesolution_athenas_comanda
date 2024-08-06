@@ -15,7 +15,7 @@
  .cabecalho {height: 56px;}
  .cabecalho .logo { width: 176px; height: 27px; margin-left: 45px; display: inline-block;  margin-top: 11px;}
 .Home .h4 {  font-size: 1.2rem!important;}
-#principal, .principal { 
+#principal, .principal {
     display: block;
     position: initial;
     background:none;
@@ -114,7 +114,7 @@
     max-width: 82%;
     flex: 0 0 82%;
 }
-.ordem .ordem-left { max-width: 361px;}
+.ordem .ordem-left { max-width: 440px;}
 }
 
 /*1280*/
