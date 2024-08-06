@@ -78,9 +78,4 @@ Route::group(['prefix'=>'delivery','as'=>'delivery.'], function () {
 
     Route::get('/cartao/ver/{id}',[CartaoController::class, 'ver'])->name('cartao.ver');
     Route::get('/pix/ver/{id}',[PixController::class, 'ver'])->name('pix.ver');
-
-
 });
-
-
-

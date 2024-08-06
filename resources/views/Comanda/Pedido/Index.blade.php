@@ -11,7 +11,6 @@
 @section('conteudo')
     <div class="col-12 m-auto">
         <div class="pedido border p-1 radius-4 bg-branco">
-
             <div class="rows">
                 <div class="col-12">
                     <div class="p-0">
@@ -53,18 +52,13 @@
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         {{ csrf_field() }}
                                                     </form>
-
-
                                                 </td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
-
-
                             <div class="col-6">
                                 <h1>Pedidos Online </h1>
                                 <div class="scroll-130 border bg-normal px-0">
@@ -95,12 +89,9 @@
                                                             Cozinha
                                                         </a>
                                                     @endif
-
                                                     <a href="{{ route('pedido.edit', $p->id) }}"
                                                         class="fas fa-edit btn btn-azul mx-1" title="Excluir">
                                                     </a>
-
-
                                                     <a href="#"
                                                         onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $p->id }}').submit() : '';"
                                                         class="d-inline-block btn btn-vermelho btn-circulo btn-pequeno"
@@ -110,19 +101,13 @@
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         {{ csrf_field() }}
                                                     </form>
-
-
                                                 </td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
-
-
-
                             <div class="col-6">
                                 <h1>Pedidos Delivery </h1>
                                 <div class="scroll-130 border bg-normal px-0">
@@ -153,12 +138,9 @@
                                                             Cozinha
                                                         </a>
                                                     @endif
-
                                                     <a href="{{ route('pedido.edit', $p->id) }}"
                                                         class="fas fa-edit btn btn-azul mx-1" title="Excluir">
                                                     </a>
-
-
                                                     <a href="#"
                                                         onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $p->id }}').submit() : '';"
                                                         class="d-inline-block btn btn-vermelho btn-circulo btn-pequeno"
@@ -168,27 +150,17 @@
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         {{ csrf_field() }}
                                                     </form>
-
-
                                                 </td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
-
-
-
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 @endsection

@@ -27,11 +27,9 @@
                             <div class="col-6 mb-3">
                                 <span class="d-block px-4 h3 mb-0"><b>Valor: </b>R$ {{ $pedido->total }}</span>
                             </div>
-
                         </div>
-
                         <div class="rows">
-                            <div class="col-12 mb-3 ">
+                            <div class="col-12 mb-3">
                                 <div class="bg-normal">
                                     <span class="d-block p-1 px-4 h6 mb-0"><b>Ordem enviados para a cozinha</b></span>
                                     <div class="pb-1 scroll-260" style="padding:0 5px;">
@@ -41,7 +39,7 @@
                                                 <tr class="bg-branco">
                                                     <th align="left">Item</td>
                                                     <th align="center">Qtde</td>
-                                                    <th align="center">Valor</td>
+                                                    <th align="center">Vl. Unit.</td>
                                                     <th align="center">Ação</td>
                                                 </tr>
                                             </thead>
