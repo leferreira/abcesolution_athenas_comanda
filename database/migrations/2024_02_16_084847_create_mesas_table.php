@@ -22,7 +22,6 @@ return new class extends Migration
             $table->foreign('comanda_id')->references('id')->nullable()->on('comandas');
 
             $table->BigInteger('status_id')->nullable()->unsigned();
-            $table->foreign('status_id')->references('id')->on('statuses');
             $table->string("nome", 80);
             $table->timestamps();
         });

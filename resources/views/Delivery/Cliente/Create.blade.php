@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="botoes border-top alt">
                                         <input type="hidden" name="empresa_id" value="1">
-                                        <input type="submit" value="Salvar" class="btn btn-verde2 d-block">
+                                        <input type="submit" value="Salvar" class="btn btn-verde d-block">
                                     </div>
                                 </div>
                             </div>

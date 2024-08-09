@@ -22,7 +22,7 @@
                         </div>
                         <div class="botoes bg-normal">
                             <a href="{{ route('delivery.deliveryproduto.detalhe', $p->id) }}"
-                                class="btn btn-verde2">Detalhes</a>
+                                class="btn btn-verde">Detalhes</a>
                         </div>
                     </div>
                 </div>

@@ -160,7 +160,7 @@
 
     <div class="tfooter end">
         <a href="" class="fechar btn btn-neutro">Fechar</a>
-        <input type="submit" class="btn btn-verde2" value="Salvar alteração">
+        <input type="submit" class="btn btn-verde" value="Salvar alteração">
     </div>
 </div>
 

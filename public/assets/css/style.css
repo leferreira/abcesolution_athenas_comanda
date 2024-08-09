@@ -42,28 +42,29 @@ a{text-decoration:none}
   --blue-grey-700: #334e68;
   --blue-grey-800: #243b53;
   --blue-grey-900: #102a43;
-  
+
   --anual:#a4bdfc;
   --Atividades:#fbd75b;
   --reunioes:#ffb878;
   --salaAula:#46d6db;
-  
+
   --eventos: #0a0a0a;
 }
 
 .site{
 	height:100%;
-	background:linear-gradient(#6a93b5 -27%, #fff 45%);
+    background-color: #eeeeee;
+	/*background:linear-gradient(#6a93b5 -27%, #fff 45%);
 	background:-moz-linear-gradient(#6a93b5 -27%, #fff 45%);
-	background:-o-linear-gradient(#6a93b5 -27%, #fff 45%);
+	background:-o-linear-gradient(#6a93b5 -27%, #fff 45%);*/
 }
 .Home{padding-top:1rem;min-height: 100%;}
 .Home .h4{font-size:.9rem!important;text-align:center;font-weight:600}
 .Home .caixa{border-color:#79a0c9;width:100%;padding: 0;}
 .Home .tt{text-align:center;font-weight:600;display:block;padding:5px 0;font-size:1.1rem;color: #315c9e;}
-.Home .tt2{text-align:center;font-weight:600;display:block;padding:5px 0;font-size:1rem;color:#a7b0b5}
+.Home .tt2{text-align:center;font-weight:600;display:block;padding:2px 0;font-size:1rem;color:#a7b0b5}
 .Home .thumb{width:100%;height:auto;}
-.Home .botoes{display:grid;padding: 10px;}
+.Home .botoes{display:grid;padding: 5px;}
 .Home .botoes.alt{display:flex!important}
 .Home .botoes .btn{margin-bottom:10px;}
 .conteudo{
@@ -71,9 +72,9 @@ a{text-decoration:none}
     /* margin: 0 auto; */
     max-width: 100%;
    /* margin-left: 200px;*/
-   padding:0 1rem 
+   padding:0 1rem
 }
-.cabecalho{	
+.cabecalho{
 	background:linear-gradient(64deg, #3482c1, #315b9d);
 	width:100%; height: 56px;
     border-bottom: solid 4px #080808;
@@ -123,7 +124,7 @@ a{text-decoration:none}
 .cabecalho .menu-topo-text .sub .thumb img{height: 40px; border-radius: 100px; padding: 4px;}
 .cabecalho .menu-topo-text .sub .thumb span{display:none}
 .cabecalho .menu-topo-text .sub a{color:#fff;}
-.cabecalho .menu-topo-text .sub ul, 
+.cabecalho .menu-topo-text .sub ul,
 .cabecalho .menu-topo-text .usuario .sub ul{
 	width: 174px;
 	right:-5px;
@@ -218,7 +219,7 @@ a{text-decoration:none}
 .menu-esquerdo ul,#caixa_user ul{display:block;text-align:center; max-height: 80vh;  overflow-y: auto;}
 .menu-esquerdo ul li,#caixa_user ul li{text-align:center;display:block;margin:7px 1rem;text-transform: uppercase;}
 
-.menu-esquerdo ul li a{  
+.menu-esquerdo ul li a{
 	width:100%;
 	display: block;
     padding: 7px 0.5rem;
@@ -278,7 +279,7 @@ a{text-decoration:none}
 .caixa{
 	width: 100%;
     max-width: 100%;
-	padding:15px ;  
+	padding:15px ;
 	border: 0;
 	background: #ffffff;
     border: solid 1px #cad5e1;
@@ -402,7 +403,7 @@ a{text-decoration:none}
 .del-comanda li{background:none!important;}
 .del-comanda li.ui-state-active a.caixa{position:relative; background: #56c5f7;border-color: #2a74af;}
 .detalhe-com  .ui-tabs-panel.ui-widget-content {margin-top: .6rem!important;}
-.detalhe-com li.ui-state-active a.caixa:before { 
+.detalhe-com li.ui-state-active a.caixa:before {
 	content:"";
 	border: solid 13px transparent;
     border-bottom: solid 10px #2a74af;
@@ -411,7 +412,7 @@ a{text-decoration:none}
     bottom: -0.98rem;
     z-index: 1;
 }
-.detalhe-com li.ui-state-active a.caixa:after { 
+.detalhe-com li.ui-state-active a.caixa:after {
 	content:"";
 	border: solid 14px transparent;
     border-bottom: solid 11px #56c5f7;

@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="col-12 mb-3 d-flex px-4 text-end">
-                                <a href="{{ route('pedido.pedidoPronto', $pedido->id) }}" class="btn btn-verde2">Pedido
+                                <a href="{{ route('pedido.pedidoPronto', $pedido->id) }}" class="btn btn-verde">Pedido
                                     Pronto <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>

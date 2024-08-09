@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Comanda;
 use App\Models\ComandaCategoria;
 use App\Models\ComandaPedido;
+use App\Models\DeliveryOpcao;
+use App\Models\DeliveryOpcaoItem;
+use App\Models\DeliveryTipoSelecao;
 use App\Models\Empresa;
 use App\Models\Mesa;
 use App\Models\PedidoComanda;
@@ -80,10 +83,10 @@ class PedidoController extends Controller
     public function enviarCozinha($id)
     {
         $pedido = ComandaPedido::find($id);
-        $pedido->status_id = config("constantes.status.ENVIADO_PARA_COZINHA");
+        $pedido->status_id = 41;
         $pedido->save();
         if ($pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_GARCON") || $pedido->tipo_pedido == config("constantes.tipo_pedido.COMANDA_CLIENTE")) {
-            Mesa::find($pedido->mesa_id)->update(["status_id" => $pedido->status_id]);
+            Mesa::find($pedido->mesa_id)->update(["status_id" => 41]);
         }
         return redirect()->route('mesa.index');
     }
@@ -133,6 +136,8 @@ class PedidoController extends Controller
     {
         $dados["pedido"] = ComandaPedido::find($id);
         $dados["categorias"] = ComandaCategoria::get();
+        $dados["opcoes"] = DeliveryOpcao::all();
+        $dados["opcoesItens"] = DeliveryOpcaoItem::all();
         return view("Comanda.Pedido.Itens", $dados);
     }
 

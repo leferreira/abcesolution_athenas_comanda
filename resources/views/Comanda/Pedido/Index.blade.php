@@ -37,11 +37,11 @@
                                             <td align="center"><?php echo $p->id; ?></td>
                                             <td align="center"><?php echo databr($p->data_abertura); ?></td>
                                             <td align="center"><?php echo $p->hora_abertura; ?></td>
-                                            <td align="center"><?php echo $p->status->status; ?></td>
+                                            <td align="center">{{ isset($p->status->status) ? $p->status->status : '' }}</td>
                                             <td align="center"><?php echo $p->total; ?></td>
                                             <td class="text-right">
                                                 <a href="{{ route('pedido.edit', $p->id) }}"
-                                                   class="fas fa-edit btn btn-azul mx-1" title="Excluir">
+                                                   class="fas fa-edit btn btn-azul mx-1" title="Editar">
                                                 </a>
                                                 <a href="#"
                                                    onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $p->id }}').submit() : '';"
@@ -81,7 +81,7 @@
                                             <td align="center"><?php echo $p->id; ?></td>
                                             <td align="center"><?php echo databr($p->data_abertura); ?></td>
                                             <td align="center"><?php echo $p->hora_abertura; ?></td>
-                                            <td align="center"><?php echo $p->status->status; ?></td>
+                                            <td align="center">{{ isset($p->status->status) ? $p->status->status : '' }}</td>
                                             <td align="center"><?php echo $p->total; ?></td>
                                             <td class="text-right">
                                                 @if ($p->status_id == config('constantes.status.NOVO'))
@@ -139,7 +139,8 @@
                                                     </a>
                                                 @endif
                                                 {{--<a href="{{ route('pedido.edit', $p->id) }}" class="fas fa-edit btn btn-azul mx-1" title="Editar"></a>--}}
-                                                <a href="#" onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $p->id }}').submit() : '';"
+                                                <a href="#"
+                                                   onclick="confirm('Tem Certeza?') ? document.getElementById('apagar{{ $p->id }}').submit() : '';"
                                                    class="d-inline-block btn btn-vermelho btn-circulo btn-pequeno"
                                                    title="Excluir"><i class="fas fa-trash-alt"></i>
                                                 </a>

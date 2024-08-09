@@ -70,7 +70,7 @@
                             <div class="col-12 mb-3 d-flex px-4 text-end">
                                 @if ($pedido->status_id == config('constantes.status.ABERTO'))
                                     <a href="{{ route('pedidocliente.enviarPedido', $pedido->id) }}"
-                                        class="btn btn-verde2">Enviar
+                                        class="btn btn-verde">Enviar
                                         Pedido <i class="fas fa-arrow-right"></i></a>
                                 @endif
                             </div>

@@ -28,19 +28,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
-
-
-
-
-
 
     <div id="fundo_preto"></div>
 @endsection

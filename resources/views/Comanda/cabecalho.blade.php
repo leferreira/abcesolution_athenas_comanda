@@ -14,7 +14,6 @@
                         <li><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
                         <li><a href="{{ route('pedido.index') }}"> Pedidos</a></li>
                         <li><a href="{{ route('cozinha.index') }}"> Cozinha</a></li>
-
                     </ul>
                 </li>
             </ul>

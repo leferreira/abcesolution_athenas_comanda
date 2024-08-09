@@ -6,11 +6,11 @@
             @include('Comanda.menu')
         </div>
         <div class="menu-topo-text">
-            <ul>
+            <ul class="pt-1">
                 <li class="sub">
 
                 <li>
-                    <h2>Visão do Admin</h2>
+                    <h2 class="text-branco">Visão do Admin</h2>
                 </li>
                 <li><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="{{ route('pedido.index') }}"> Pedidos</a></li>
@@ -18,25 +18,25 @@
                 <li><a href="{{ route('cozinha.index') }}"> Cozinha</a></li>
                 <li>
                     @if (Auth::check())
-                        <span>{{ Auth::user()->nome }}</span>
+                        <span class="text-branco border-bottom">{{ Auth::user()->nome }}</span>
                     @endif
                 </li>
+                <li>
+                    <ul class="usuario">
+                        <li>
+                            @if (Auth::check())
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
 
-                <ul class="usuario">
-                    <li>
-                        @if (Auth::check())
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            @endif
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        @endif
-
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

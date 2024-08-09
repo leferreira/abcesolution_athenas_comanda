@@ -45,9 +45,7 @@
                     } else {
                         include 'home.php';
                     }
-
                     ?>
-
                 </div>
             </div>
         </div>
@@ -59,14 +57,10 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <script src="js/datatables/js/jquery.dataTables.min.js"></script>
     <script src="js/datatables/js/dataTables.responsive.min.js"></script>
     <script src="js/js.js"></script>
     <script src="js/componentes/js_modal.js"></script>
     <script src="js/componentes/js_data_table.js"></script>
-
-
 </body>
-
 </html>

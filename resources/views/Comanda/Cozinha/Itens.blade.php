@@ -29,7 +29,7 @@
                                                         <td class="text-center">{{ $ped->hora_abertura }}</td>
                                                         <td class="text-right">
                                                             <a href="{{ route('cozinha.show', $ped->id) }}"
-                                                                class="fas fa-edit btn btn-azul mx-1" title="Excluir">
+                                                                class="fas fa-edit btn btn-azul mx-1" title="Editar">
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="col-12 mb-3 d-flex px-4 text-end">
-                                <a href="{{ route('pedido.pedidoPronto', $pedido->id) }}" class="btn btn-verde2">Pedido
+                                <a href="{{ route('pedido.pedidoPronto', $pedido->id) }}" class="btn btn-verde">Pedido
                                     Pronto <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>

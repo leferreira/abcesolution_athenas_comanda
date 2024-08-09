@@ -15,26 +15,19 @@ return new class extends Migration
     {
         Schema::create('comanda_pedidos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('empresa_id')->nullable()->unsigned();
-            $table->foreign('empresa_id')->references('id')->on('empresas');
+            $table->bigInteger('empresa_id')->nullable();
 
-            $table->bigInteger('cliente_id')->nullable()->unsigned();
-            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->bigInteger('cliente_id')->nullable();
 
-            $table->bigInteger('comanda_id')->nullable()->unsigned();
-            $table->foreign('comanda_id')->references('id')->on('comandas');
+            $table->bigInteger('comanda_id')->nullable();
 
-            $table->bigInteger('mesa_id')->nullable()->unsigned();
-            $table->foreign('mesa_id')->references('id')->on('mesas');
+            $table->bigInteger('mesa_id')->nullable();
 
-            $table->BigInteger('status_id')->nullable()->unsigned();
-            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->BigInteger('status_id')->nullable();
 
-            $table->BigInteger('garcon_id')->nullable()->unsigned();
-            $table->foreign('garcon_id')->references('id')->on('comanda_garcons');
+            $table->BigInteger('garcon_id')->nullable();
 
-            $table->BigInteger('admin_id')->nullable()->unsigned();
-            $table->foreign('admin_id')->references('id')->on('comanda_admins');
+            $table->BigInteger('admin_id')->nullable();
 
             $table->string('online',1)->default('N');
             $table->integer('tipo_pedido'); //1 - Mesa / 2 - cliente mesa / 3 - Delivery

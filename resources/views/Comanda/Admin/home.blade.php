@@ -1,9 +1,7 @@
 @extends('Comanda.Admin.template')
 @section('conteudo')
     <div class="col-12 py-3">
-
         <div class="rows rows2">
-
             @foreach ($mesas as $mesa)
                 <div class="col-2 d-flex mb-3">
                     <div class="caixa {{ $mesa->status_id == config('constantes.status.ABERTO') ? 'comanda-ativo' : '' }} ">
